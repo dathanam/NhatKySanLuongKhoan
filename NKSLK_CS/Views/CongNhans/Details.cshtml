@@ -1,0 +1,90 @@
+﻿@model NKSLK_CS.CongNhan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CongNhan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PhongBan.ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhongBan.ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phuong.ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phuong.ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngay_sinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngay_sinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gioi_tinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gioi_tinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chuc_vu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chuc_vu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.que_quan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.que_quan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.luong_hop_dong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.luong_hop_dong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.luong_bao_hiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.luong_bao_hiem)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

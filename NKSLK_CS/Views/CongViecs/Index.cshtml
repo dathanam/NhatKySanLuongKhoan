@@ -1,0 +1,67 @@
+﻿@model IEnumerable<NKSLK_CS.CongViec>
+
+@{
+    ViewBag.Title = "CongViec";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Công Việc
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DanhMucCongViec.ten)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SanPham.ten)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.san_luong_thuc_te)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.so_lo)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DanhMucCongViec.ten)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SanPham.ten)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.san_luong_thuc_te)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.so_lo)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
