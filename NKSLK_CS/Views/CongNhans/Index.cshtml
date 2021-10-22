@@ -1,5 +1,5 @@
-﻿@model IEnumerable<NKSLK_CS.CongNhan>
-
+﻿
+@model IEnumerable<NKSLK_CS.CongNhan>
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -19,82 +19,73 @@
         "sorting": {
           "enabled": true
         }}'>
-                <thead>
+                <table class="table">
                     <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Job Title</th>
-                        <th>Date of Birth</th>
-                        <th>Action</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ten)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ngay_sinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gioi_tinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chuc_vu)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.que_quan)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.luong_hop_dong)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.luong_bao_hiem)
+                        </th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr data-expanded="true">
-                        <td>1</td>
-                        <td>Dennise</td>
-                        <td>Fuhrman</td>
-                        <td>High School History Teacher</td>
-                        <td>July 25th 1960</td>
-                        <td>
-                            <i class="fa fa-wrench" data-toggle="modal" data-target="#myModalEdit"></i>
-                            <i class="fa fa-trash" data-toggle="modal" data-target="#myModal"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Elodia</td>
-                        <td>Weisz</td>
-                        <td>Wallpaperer Helper</td>
-                        <td>March 30th 1982</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Raeann</td>
-                        <td>Haner</td>
-                        <td>Internal Medicine Nurse Practitioner</td>
-                        <td>February 26th 1966</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Junie</td>
-                        <td>Landa</td>
-                        <td>Offbearer</td>
-                        <td>March 29th 1966</td>
-                    </tr>
-                    <tr data-expanded="true">
-                        <td>1</td>
-                        <td>Dennise</td>
-                        <td>Fuhrman</td>
-                        <td>High School History Teacher</td>
-                        <td>July 25th 1960</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Elodia</td>
-                        <td>Weisz</td>
-                        <td>Wallpaperer Helper</td>
-                        <td>March 30th 1982</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Raeann</td>
-                        <td>Haner</td>
-                        <td>Internal Medicine Nurse Practitioner</td>
-                        <td>February 26th 1966</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Junie</td>
-                        <td>Landa</td>
-                        <td>Offbearer</td>
-                        <td>March 29th 1966</td>
-                    </tr>
-                </tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ten)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngay_sinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.gioi_tinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.chuc_vu)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.que_quan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.luong_hop_dong)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.luong_bao_hiem)
+                            </td>
+                            <td>
+                                <i class="fa fa-wrench" data-toggle="modal" data-target="#myModalEdit"></i>
+                                <i class="fa fa-trash" data-toggle="modal" data-target="#myModal"></i>
+                            </td>
+                        </tr>
+                    }
+                </table>
             </table>
         </div>
     </div>
 </div>
+
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog" style="width: 25%">
@@ -126,10 +117,11 @@
                             </header>
                             <div class="panel-body">
                                 <form role="form" class="form-horizontal ">
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">sample 1</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="" id="f-name" class="form-control" required />
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ten, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.ten, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ten, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="form-group has-success">

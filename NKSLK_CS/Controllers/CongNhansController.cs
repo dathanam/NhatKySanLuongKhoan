@@ -17,8 +17,8 @@ namespace NKSLK_CS.Controllers
         // GET: CongNhans
         public ActionResult Index()
         {
- //           var congNhan = db.CongNhan.Where(x => x.id != 0);
-            return View();
+            var congNhan = db.CongNhan.Where(x => x.id != 0);
+            return View(congNhan.ToList());
         }
 
         // GET: CongNhans/Details/5
