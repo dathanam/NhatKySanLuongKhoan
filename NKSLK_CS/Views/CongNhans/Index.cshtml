@@ -19,68 +19,54 @@
         "sorting": {
           "enabled": true
         }}'>
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ten)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ngay_sinh)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.gioi_tinh)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.chuc_vu)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.que_quan)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.luong_hop_dong)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.luong_bao_hiem)
-                        </th>
-                    </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ten)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ngay_sinh)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gioi_tinh)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.chuc_vu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.que_quan)
+                    </th>
+                </tr>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ten)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ngay_sinh)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.gioi_tinh)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.chuc_vu)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.que_quan)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.luong_hop_dong)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.luong_bao_hiem)
-                            </td>
-                            <td>
-                                <i class="fa fa-wrench" data-toggle="modal" data-target="#myModalEdit"></i>
-                                <i class="fa fa-trash" data-toggle="modal" data-target="#myModal"></i>
-                            </td>
-                        </tr>
-                    }
-                </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ten)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngay_sinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gioi_tinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.chuc_vu)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.que_quan)
+                        </td>
+                        <td>
+                            <i class="fa fa-wrench" data-toggle="modal" data-target="#myModalEdit"></i>
+                            <i class="fa fa-trash" data-toggle="modal" data-target="#myModal"></i>
+                        </td>
+                    </tr>
+                }
             </table>
         </div>
     </div>
@@ -110,29 +96,71 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12"> 
                         <section class="panel">
                             <header class="panel-heading">
                                 Thêm mới công nhân
                             </header>
                             <div class="panel-body">
-                                <form role="form" class="form-horizontal ">
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.ten, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.ten, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.ten, "", new { @class = "text-danger" })
+                                <form role="form" class="form-horizontal" method="post" action="/CongNhans/Create">
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Tên</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="ten" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">sample 2</label>
+                                        <label class="col-lg-3 control-label">Ngày sinh</label>
                                         <div class="col-lg-6">
-                                            <input type="text" placeholder="" id="f-name" class="form-control" required />
+                                            <input type="date" placeholder="" name="ngay_sinh" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Giới tính</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="gioi_tinh" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Chức vụ</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="chuc_vu" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Quê quán</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="que_quan" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">lương hợp đồng</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="luong_hop_dong" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Lương bảo hiểm</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="luong_bao_hiem" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Phòng ban</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="id_phong_ban" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Phường</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="" name="id_phuong" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-offset-3 col-lg-6">
-                                            <button type="button" class="btn btn-success">Thêm</button>
+                                            <button type="submit" class="btn btn-success">Thêm</button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                                         </div>
                                     </div>
