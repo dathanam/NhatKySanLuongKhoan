@@ -6,6 +6,9 @@ header.header.fixed-top.clearfix {
 }
 section.wrapper {
     margin-top: 50px;
+    padding: 10px;
+    margin-left: -16px;
+}
 }
 ul.nav.pull-right.top-menu {
     margin-top: -5px;
@@ -43,3 +46,4 @@ h3.heading_title {
     padding: 20px;
     padding-right: 100px;
 }
+
