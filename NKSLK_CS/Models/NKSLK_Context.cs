@@ -1,3 +1,4 @@
+using NKSLK_CS.Models;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -11,7 +12,7 @@ namespace NKSLK_CS
             : base("name=NKSLK_Context")
         {
         }
-
+        public virtual DbSet<Account> Account { get; set; }
         public virtual DbSet<CaLamViec> CaLamViec { get; set; }
         public virtual DbSet<CongNhan> CongNhan { get; set; }
         public virtual DbSet<CongViec> CongViec { get; set; }
