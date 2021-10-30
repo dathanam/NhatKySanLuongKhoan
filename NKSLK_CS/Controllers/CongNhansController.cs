@@ -18,6 +18,8 @@ namespace NKSLK_CS.Controllers
         public ActionResult Index()
         {
             var CongNhan = db.CongNhan.Where(x => x.id != 0);
+            ViewBag.phongban = new CongNhansController().Chucvu();
+            ViewBag.phuong = new CongNhansController().getPhuong();
             return View(CongNhan);
         }
 
@@ -29,75 +31,69 @@ namespace NKSLK_CS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public List<PhongBan> Chucvu()
+        {
+            var model = db.PhongBan.ToList();
+            return model;
+        }
 
-        // GET: CongNhans/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    CongNhan congNhan = db.CongNhan.Find(id);
-        //    if (congNhan == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.id_phong_ban = new SelectList(db.PhongBan, "id", "ten", congNhan.id_phong_ban);
-        //    ViewBag.id_phuong = new SelectList(db.Phuong, "id", "ten", congNhan.id_phuong);
-        //    return View(congNhan);
-        //}
+        public List<Phuong> getPhuong()
+        {
+            var model = db.Phuong.ToList();
+            return model;
+        }
 
-        //// POST: CongNhans/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "id,ten,ngay_sinh,gioi_tinh,chuc_vu,que_quan,luong_hop_dong,luong_bao_hiem,id_phong_ban,id_phuong")] CongNhan congNhan)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(congNhan).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.id_phong_ban = new SelectList(db.PhongBan, "id", "ten", congNhan.id_phong_ban);
-        //    ViewBag.id_phuong = new SelectList(db.Phuong, "id", "ten", congNhan.id_phuong);
-        //    return View(congNhan);
-        //}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CongNhan congNhan = db.CongNhan.Find(id);
+            if (congNhan == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDelete", congNhan);
+        }
 
-        //// GET: CongNhans/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    CongNhan congNhan = db.CongNhan.Find(id);
-        //    if (congNhan == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(congNhan);
-        //}
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            CongNhan congNhan = db.CongNhan.Find(id);
+            db.CongNhan.Remove(congNhan);
+            db.SaveChanges();
 
-        //// POST: CongNhans/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    CongNhan congNhan = db.CongNhan.Find(id);
-        //    db.CongNhan.Remove(congNhan);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("Index");
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CongNhan congNhan = db.CongNhan.Find(id);
+            if (congNhan == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialEdit", congNhan);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CongNhan congNhan)
+        {
+            var result = db.CongNhan.SingleOrDefault(b => b.id == congNhan.id);
+
+            if (result != null)
+            {
+                result.ten = congNhan.ten;
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
