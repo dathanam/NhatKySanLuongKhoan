@@ -132,6 +132,7 @@
     <Compile Include="Controllers\CongNhansController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NKSLKController.cs" />
+    <Compile Include="Controllers\PhongBansController.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CaLamViec.cs" />
     <Compile Include="Models\CongNhan.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBConecttion.cs" />
     <Compile Include="Models\NhatKySanLuongKhoan.cs" />
     <Compile Include="Models\NKSLK_Context.cs" />
     <Compile Include="Models\PhongBan.cs" />
@@ -253,6 +255,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\CongNhans\Index.cshtml" />
     <Content Include="Views\NKSLK\Index.cshtml" />
+    <Content Include="Views\PhongBans\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
