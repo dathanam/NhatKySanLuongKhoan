@@ -1,8 +1,4 @@
-﻿@model IEnumerable<NKSLK_CS.CongNhan>
-@{
-    var phongbans = (List<NKSLK_CS.PhongBan>)ViewBag.phongban;
-    var phuong = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
-}
+﻿@model IEnumerable<NKSLK_CS.SanPham>
 
 <script>
     $(document).ready(function () {
@@ -55,7 +51,7 @@
             <div class="heading_btn">
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModalNew">New</button>
             </div>
-            <h3 class="heading_title">Công Nhân</h3>
+            <h3 class="heading_title">Sản Phẩm</h3>
             <form style="float: right; margin-top:-48px;">
                 <input type="text" class="form-control search" placeholder=" Search">
             </form>
@@ -76,23 +72,21 @@
                         @Html.DisplayNameFor(model => model.ten)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ngay_sinh)
+                        @Html.DisplayNameFor(model => model.so_dang_ky)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.gioi_tinh)
+                        @Html.DisplayNameFor(model => model.ngay_dang_ky)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.PhongBan)
+                        @Html.DisplayNameFor(model => model.ngay_san_xuat)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.chuc_vu)
+                        @Html.DisplayNameFor(model => model.han_su_dung)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.que_quan)
+                        @Html.DisplayNameFor(model => model.quy_cach)
                     </th>
-                    <th>
-                        Action
-                    </th>
+                    <th></th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -102,33 +96,32 @@
                             @Html.DisplayFor(modelItem => item.ten)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ngay_sinh, "{0:dd/MM/yyyy}")
+                            @Html.DisplayFor(modelItem => item.so_dang_ky)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.gioi_tinh)
-                        </td>
-                        @foreach (PhongBan icon in phongbans.Where(n => n.id == item.id_phong_ban))
-                        {
-                            <td>
-                                @icon.ten
-                            </td>
-                        }
-                        <td>
-                            @Html.DisplayFor(modelItem => item.chuc_vu)
+                            @Html.DisplayFor(modelItem => item.ngay_dang_ky)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.que_quan)
+                            @Html.DisplayFor(modelItem => item.ngay_san_xuat)
                         </td>
                         <td>
-                            <a href="/CongNhans/Edit/@item.id" class="btn-edit"><i class="fa fa-wrench"></i></a>
-                            <a href="/CongNhans/Delete/@item.id" class="btn-delete"><i class="fa fa-trash"></i></a>
+                            @Html.DisplayFor(modelItem => item.han_su_dung)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quy_cach)
+                        </td>
+                        <td>
+                            <a href="/SanPhams/Edit/@item.id" class="btn-edit"><i class="fa fa-wrench"></i></a>
+                            <a href="/SanPhams/Delete/@item.id" class="btn-delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 }
+
             </table>
         </div>
     </div>
 </div>
+
 
 <div id="myModalEdit" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -151,78 +144,45 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                                Thêm mới công nhân
+                                Thêm mới sản phẩm
                             </header>
                             <div class="panel-body">
-                                <form role="form" class="form-horizontal" method="post" action="/CongNhans/Create">
+                                <form role="form" class="form-horizontal" method="post" action="/SanPhams/Create">
                                     @Html.AntiForgeryToken()
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Tên</label>
+                                        <label class="col-lg-5 control-label">Tên</label>
                                         <div class="col-lg-6">
                                             <input type="text" placeholder="" name="ten" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Ngày sinh</label>
+                                        <label class="col-lg-5 control-label">Số đăng ký</label>
                                         <div class="col-lg-6">
-                                            <input type="date" placeholder="" name="ngay_sinh" class="form-control" required />
+                                            <input type="text" placeholder="" name="so_dang_ky" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Giới tính</label>
+                                        <label class="col-lg-5 control-label">Ngày đăng ký</label>
                                         <div class="col-lg-6">
-                                            <select class="w3-select w3-border" name="gioi_tinh" required>
-                                                <option value="nam" selected>Nam</option>
-                                                <option value="nữ">Nữ</option>
-                                            </select>
+                                            <input type="date" placeholder="" name="ngay_dang_ky" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Chức vụ</label>
+                                        <label class="col-lg-5 control-label">Ngày sản xuất</label>
                                         <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="chuc_vu" class="form-control" required />
+                                            <input type="date" placeholder="" name="ngay_san_xuat" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Quê quán</label>
+                                        <label class="col-lg-5 control-label">Hạn sử dụng</label>
                                         <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="que_quan" class="form-control" required />
+                                            <input type="date" placeholder="" name="han_su_dung" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">lương hợp đồng</label>
+                                        <label class="col-lg-5 control-label">Quy cách</label>
                                         <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="luong_hop_dong" class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Lương bảo hiểm</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="luong_bao_hiem" class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Phòng ban</label>
-                                        <div class="col-lg-6">
-                                            <select class="w3-select w3-border" name="id_phong_ban" required>
-                                                <option value="" disabled selected>Choose your option</option>
-                                                @foreach (PhongBan item in phongbans)
-                                                {
-                                                    <option value=@item.id>@item.ten</option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Phường</label>
-                                        <div class="col-lg-6">
-                                            <select class="w3-select w3-border" name="id_phuong" required>
-                                                <option value="" disabled selected>Choose your option</option>
-                                                @foreach (Phuong item in phuong)
-                                                {
-                                                    <option value=@item.id>@item.ten</option>
-                                                }
-                                            </select>
+                                            <input type="text" placeholder="" name="quy_cach" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -240,4 +200,3 @@
         </div>
     </div>
 </div>
-

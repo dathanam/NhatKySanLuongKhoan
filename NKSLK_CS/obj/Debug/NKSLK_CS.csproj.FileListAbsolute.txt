@@ -325,7 +325,6 @@ D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\bin\System.Web.WebPages.Razor.xml
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\bin\Newtonsoft.Json.xml
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\bin\Antlr3.Runtime.pdb
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.AssemblyReference.cache
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.CoreCompileInputs.cache
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.dll
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.pdb

@@ -89,6 +89,11 @@ namespace NKSLK_CS.Controllers
             if (result != null)
             {
                 result.ten = congNhan.ten;
+                result.ngay_sinh = congNhan.ngay_sinh;
+                result.PhongBan.ten = congNhan.PhongBan.ten;
+                result.chuc_vu = congNhan.chuc_vu;
+                result.luong_hop_dong = congNhan.luong_hop_dong;
+                result.luong_bao_hiem = congNhan.luong_bao_hiem;
 
                 db.SaveChanges();
             }

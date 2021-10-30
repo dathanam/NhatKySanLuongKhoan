@@ -132,6 +132,7 @@
     <Compile Include="Controllers\CongNhansController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NKSLKController.cs" />
+    <Compile Include="Controllers\SanPhamsController.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CaLamViec.cs" />
     <Compile Include="Models\CongNhan.cs" />
@@ -253,6 +254,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\CongNhans\Index.cshtml" />
     <Content Include="Views\NKSLK\Index.cshtml" />
+    <Content Include="Views\SanPhams\Index.cshtml" />
+    <Content Include="Views\SanPhams\PartialDelete.cshtml" />
+    <Content Include="Views\SanPhams\PartialEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
