@@ -1,4 +1,4 @@
-﻿@model NKSLK_CS.CongNhan
+﻿@model NKSLK_CS.DanhMucCongViec
 
 <div class="modal-content">
     <div class="modal-body">
@@ -9,42 +9,42 @@
                         Chỉnh sửa
                     </header>
                     <div class="panel-body">
-                        @using (Html.BeginForm("Edit", "CongNhans"))
+                        @using (Html.BeginForm("Edit", "DanhMucCongViecs"))
                         {
                             <div class="form-group has-success">
-                                <label class="col-lg-5 control-label">Họ tên</label>
+                                <label class="col-lg-5 control-label">Tên</label>
                                 <div class="col-lg-6">
                                     <input type="text" class="form-control" value="@Model.ten" name="ten" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
-                                <label class="col-lg-5 control-label">Ngày sinh</label>
+                                <label class="col-lg-5 control-label">Định mức khoán</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.ngay_sinh" name="ngay_sinh" />
+                                    <input type="text" class="form-control" value="@Model.dinh_muc_khoan" name="dinh_muc_khoan" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
-                                <label class="col-lg-5 control-label">Phòng Ban</label>
+                                <label class="col-lg-5 control-label">Đơn vị khoán</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.PhongBan.ten" name="phong_ban" />
+                                    <input type="text" class="form-control" value="@Model.don_vi_khoan" name="don_vi_khoan" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
-                                <label class="col-lg-5 control-label">Chức vụ</label>
+                                <label class="col-lg-5 control-label">Hệ số khoán</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.chuc_vu" name="chuc_vu" />
+                                    <input type="text" class="form-control" value="@Model.he_so_khoan" name="he_so_khoan" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
-                                <label class="col-lg-5 control-label">Lương hợp đồng</label>
+                                <label class="col-lg-5 control-label">Định mức lao động</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.luong_hop_dong" name="luong_hop_dong" />
+                                    <input type="text" class="form-control" value="@Model.dinh_muc_lao_dong" name="dinh_muc_lao_dong" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
-                                <label class="col-lg-5 control-label">Lương bảo hiểm</label>
+                                <label class="col-lg-5 control-label">Đơn giá</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.luong_bao_hiem" name="luong_bao_hiem" />
+                                    <input type="text" class="form-control" value="@Model.don_gia" name="don_gia" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -53,7 +53,7 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                                 </div>
                             </div>
-                        }
+                         }
                     </div>
                 </section>
             </div>

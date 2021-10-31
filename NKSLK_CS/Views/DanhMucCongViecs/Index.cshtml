@@ -1,7 +1,8 @@
-﻿@model IEnumerable<NKSLK_CS.CongNhan>
+﻿@model IEnumerable<NKSLK_CS.DanhMucCongViec>
+
 @{
-    var phongbans = (List<NKSLK_CS.PhongBan>)ViewBag.phongban;
-    var phuong = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="table-agile-info">
@@ -10,7 +11,7 @@
             <div class="heading_btn">
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModalNew">New</button>
             </div>
-            <h3 class="heading_title">Công Nhân</h3>
+            <h3 class="heading_title">Danh mục công việc</h3>
             <form style="float: right; margin-top:-48px;">
                 <input type="text" class="form-control search" placeholder=" Search">
             </form>
@@ -31,23 +32,21 @@
                         @Html.DisplayNameFor(model => model.ten)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ngay_sinh)
+                        @Html.DisplayNameFor(model => model.dinh_muc_khoan)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.gioi_tinh)
+                        @Html.DisplayNameFor(model => model.don_vi_khoan)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.PhongBan)
+                        @Html.DisplayNameFor(model => model.he_so_khoan)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.chuc_vu)
+                        @Html.DisplayNameFor(model => model.dinh_muc_lao_dong)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.que_quan)
+                        @Html.DisplayNameFor(model => model.don_gia)
                     </th>
-                    <th>
-                        Action
-                    </th>
+                    <th></th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -57,29 +56,27 @@
                             @Html.DisplayFor(modelItem => item.ten)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ngay_sinh, "{dd/mm/yyyy}")
+                            @Html.DisplayFor(modelItem => item.dinh_muc_khoan)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.gioi_tinh)
-                        </td>
-                        @foreach (PhongBan icon in phongbans.Where(n => n.id == item.id_phong_ban))
-                        {
-                            <td>
-                                @icon.ten
-                            </td>
-                        }
-                        <td>
-                            @Html.DisplayFor(modelItem => item.chuc_vu)
+                            @Html.DisplayFor(modelItem => item.don_vi_khoan)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.que_quan)
+                            @Html.DisplayFor(modelItem => item.he_so_khoan)
                         </td>
                         <td>
-                            <a href="/CongNhans/Edit/@item.id" class="btn-edit"><i class="fa fa-wrench"></i></a>
-                            <a href="/CongNhans/Delete/@item.id" class="btn-delete"><i class="fa fa-trash"></i></a>
+                            @Html.DisplayFor(modelItem => item.dinh_muc_lao_dong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.don_gia)
+                        </td>
+                        <td>
+                            <a href="/DanhMucCongViecs/Edit/@item.id" class="btn-edit"><i class="fa fa-wrench"></i></a>
+                            <a href="/DanhMucCongViecs/Delete/@item.id" class="btn-delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 }
+
             </table>
         </div>
     </div>
@@ -97,7 +94,6 @@
     </div>
 </div>
 
-
 <div id="myModalNew" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -106,78 +102,39 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                                Thêm mới công nhân
+                                Thêm mới danh mục công việc
                             </header>
                             <div class="panel-body">
-                                <form role="form" class="form-horizontal" method="post" action="/CongNhans/Create">
+                                <form role="form" class="form-horizontal" method="post" action="/DanhMucCongViecs/Create">
                                     @Html.AntiForgeryToken()
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Họ tên</label>
+                                        <label class="col-lg-3 control-label">Tên</label>
                                         <div class="col-lg-6">
                                             <input type="text" placeholder="" name="ten" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Ngày sinh</label>
+                                        <label class="col-lg-3 control-label">Định mức khoán</label>
                                         <div class="col-lg-6">
-                                            <input type="date" placeholder="" name="ngay_sinh" class="form-control" required />
+                                            <input type="text" placeholder="" name="dinh_muc_khoan" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Giới tính</label>
+                                        <label class="col-lg-3 control-label">Đơn vị khoán</label>
                                         <div class="col-lg-6">
-                                            <select class="w3-select w3-border" name="gioi_tinh" required>
-                                                <option value="nam" selected>Nam</option>
-                                                <option value="nữ">Nữ</option>
-                                            </select>
+                                            <input type="text" placeholder="" name="don_vi_khoan" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Chức vụ</label>
+                                        <label class="col-lg-3 control-label">Hệ số khoán</label>
                                         <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="chuc_vu" class="form-control" required />
+                                            <input type="text" placeholder="" name="he_so_khoan" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Quê quán</label>
+                                        <label class="col-lg-3 control-label">Định mức lao động</label>
                                         <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="que_quan" class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Lương hợp đồng</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="luong_hop_dong" class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Lương bảo hiểm</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="" name="luong_bao_hiem" class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Phòng ban</label>
-                                        <div class="col-lg-6">
-                                            <select class="w3-select w3-border" name="id_phong_ban" required>
-                                                <option value="" disabled selected>Choose your option</option>
-                                                @foreach (PhongBan item in phongbans)
-                                                {
-                                                    <option value=@item.id>@item.ten</option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label class="col-lg-3 control-label">Phường</label>
-                                        <div class="col-lg-6">
-                                            <select class="w3-select w3-border" name="id_phuong" required>
-                                                <option value="" disabled selected>Choose your option</option>
-                                                @foreach (Phuong item in phuong)
-                                                {
-                                                    <option value=@item.id>@item.ten</option>
-                                                }
-                                            </select>
+                                            <input type="text" placeholder="" name="dinh_muc_lao_dong" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group">

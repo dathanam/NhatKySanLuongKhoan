@@ -329,3 +329,4 @@ D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.CoreCompileI
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.dll
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.pdb
 D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.CopyComplete
+D:\NKSLK_PRJ\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.AssemblyReference.cache

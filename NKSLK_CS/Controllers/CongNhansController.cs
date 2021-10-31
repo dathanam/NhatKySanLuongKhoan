@@ -23,13 +23,32 @@ namespace NKSLK_CS.Controllers
             return View(CongNhan);
         }
 
+        // GET: CongNhans/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    CongNhan congNhan = db.CongNhan.Find(id);
+        //    if (congNhan == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(congNhan);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CongNhan model)
+        public ActionResult Create(CongNhan congNhan)
         {
-            db.CongNhan.Add(model);
+            if (ModelState.IsValid)
+            {
+                db.CongNhan.Add(congNhan);
             db.SaveChanges();
             return RedirectToAction("Index");
+            }
+            return View(congNhan);
         }
         public List<PhongBan> Chucvu()
         {

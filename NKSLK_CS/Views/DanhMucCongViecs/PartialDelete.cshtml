@@ -1,0 +1,14 @@
+﻿@model NKSLK_CS.DanhMucCongViec
+
+<div class="modal-content">
+    <div class="modal-body">
+        <h5>Bạn có chắc chắn muốn xóa: @Model.ten ?</h5>
+    </div>
+    <div class="modal-footer">
+        @using (Html.BeginForm("Delete", "DanhMucCongViecs", Model.id))
+        {
+            <button type="submit" class="btn btn-danger">Xóa</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+        }
+    </div>
+</div>
