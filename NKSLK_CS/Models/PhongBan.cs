@@ -81,6 +81,27 @@ namespace NKSLK_CS
             }
             return listPhongBan;
         }
+        public void AddPhongBan(PhongBan phongBan)
+        {
+            string sql = "INSERT INTO PhongBan(ten) VALUES (N'" + phongBan.ten + "') ";
+            SqlConnection connection = db.GetConnection();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            connection.Close();
+        }
+
+        public void EditPhongBan(PhongBan phongBan)
+        {
+            string sql = "UPDATE PhongBan Set id= N'"+phongBan.id+"',ten=N'"+phongBan.ten+"' Where id = "+phongBan.id;
+            SqlConnection connection = db.GetConnection();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            connection.Close();
+        }
 
     }
 

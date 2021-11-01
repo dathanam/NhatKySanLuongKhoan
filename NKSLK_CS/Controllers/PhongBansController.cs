@@ -15,5 +15,37 @@ namespace NKSLK_CS.Controllers
             List<PhongBan> obj = strPB.getPhongBan(string.Empty);
             return View(obj);
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create (PhongBan phongBan)
+        {
+            if (ModelState.IsValid)
+            {
+                PhongBanList phongBanList = new PhongBanList();
+                phongBanList.AddPhongBan(phongBan);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        // Edit
+
+        public ActionResult Edit (string id = "")
+        {
+            PhongBanList phongBanList = new PhongBanList();
+            List<PhongBan> obj = phongBanList.getPhongBan(id);
+            return View(obj.FirstOrDefault());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(PhongBan phongBan)
+        {
+            PhongBanList phongBanList = new PhongBanList();
+            phongBanList.EditPhongBan(phongBan);
+            return RedirectToAction("Index");
+        }
     }
 }
