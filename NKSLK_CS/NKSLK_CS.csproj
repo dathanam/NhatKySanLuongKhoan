@@ -256,8 +256,8 @@
     <Content Include="Views\CongNhans\Index.cshtml" />
     <Content Include="Views\NKSLK\Index.cshtml" />
     <Content Include="Views\PhongBans\Index.cshtml" />
-    <Content Include="Views\PhongBans\Edit.cshtml" />
-    <Content Include="Views\PhongBans\Delete.cshtml" />
+    <Content Include="Views\PhongBans\PartialDelete.cshtml" />
+    <Content Include="Views\PhongBans\PartialEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
