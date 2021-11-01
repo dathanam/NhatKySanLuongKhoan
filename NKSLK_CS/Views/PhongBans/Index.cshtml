@@ -12,6 +12,17 @@
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModalNew">New</button>
             </div>
             <h3 class="heading_title">Danh Sách Phòng Ban</h3>
+
+            <div class="col-md-4">
+                <div>
+                    <form action="Search" method="post">
+                        <input type="text" class="form-control form-control-sm"
+                               placeholder="nhập tên" name="ten">
+                        <button type="submit" class="btn btn-outline-primary sel">Search</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
         <div>
             <table class="table" ui-jq="footable" ui-options='{
@@ -69,7 +80,7 @@
                             <div class="panel-body">
                                 <form role="form" class="form-horizontal" method="post" action="/PhongBans/Create">
 
-                                    @Html.AntiForgeryToken()
+                                    @Html.AntiForgeryToken();
 
 
                                     <div class="form-group has-success">

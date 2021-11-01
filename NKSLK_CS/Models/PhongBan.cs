@@ -46,10 +46,10 @@ namespace NKSLK_CS
 
         // Phuong Thuc Lay database 
 
-        public List<PhongBan> getPhongBan(string id)
+        public List<PhongBan> getPhongBan(String id)
         {
             string sql;
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id.ToString()))
             {
                 sql = "SELECT * FROM PhongBan";
             }
@@ -94,7 +94,7 @@ namespace NKSLK_CS
 
         public void EditPhongBan(PhongBan phongBan)
         {
-            string sql = "UPDATE PhongBan Set id= N'"+phongBan.id+"',ten=N'"+phongBan.ten+"' Where id = "+phongBan.id;
+            string sql = "UPDATE PhongBan Set ten=N'"+phongBan.ten+"' Where id = "+phongBan.id;
             SqlConnection connection = db.GetConnection();
             SqlCommand cmd = new SqlCommand(sql, connection);
             connection.Open();
@@ -113,6 +113,7 @@ namespace NKSLK_CS
             cmd.Dispose();
             connection.Close();
         }
+
     }
 
 }
