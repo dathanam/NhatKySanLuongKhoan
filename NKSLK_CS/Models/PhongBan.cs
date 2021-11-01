@@ -103,6 +103,17 @@ namespace NKSLK_CS
             connection.Close();
         }
 
+        public void DeletePhongBan(PhongBan phongBan)
+        {
+            string sql = "DELETE From PhongBan Where id = "+phongBan.id;
+            SqlConnection connection = db.GetConnection();
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            connection.Close();
+        }
+
     }
 
 }

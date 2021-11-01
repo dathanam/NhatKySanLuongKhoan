@@ -45,10 +45,10 @@
                             </td>
 
                             <td>
-                                <button type="button" class="fa fa-wrench" data-toggle="modal" data-target="#myModalEdit" ></button>
-                                @*  <i class="fa fa-wrench" data-toggle="modal" data-target="#myModalEdit"></i> *@
-                                @* <i class="fa fa-trash" data-toggle="modal" data-target="#myModal"></i> *@
-                                <button type="button" class="fa fa-trash" data-toggle="modal" data-target="#myModal"></button>
+                                <a href="/PhongBans/Edit/@item.id" class="btn-edit" data-target="#myModalEdit"><i class="fa fa-wrench"></i></a>
+                                <a href="/PhongBans/Delete/@item.id" class="btn-delete" data-target="#myModal"><i class="fa fa-trash"></i></a>
+
+
                             </td>
                         </tr>
                     }

@@ -47,5 +47,26 @@ namespace NKSLK_CS.Controllers
             phongBanList.EditPhongBan(phongBan);
             return RedirectToAction("Index");
         }
+
+        // delete
+        public ActionResult Delete(string id = "")
+        {
+            PhongBanList phongBanList = new PhongBanList();
+            List<PhongBan> obj = phongBanList.getPhongBan(id);
+            return View(obj.FirstOrDefault());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(PhongBan phongBan)
+        {
+            PhongBanList phongBanList = new PhongBanList();
+            phongBanList.DeletePhongBan(phongBan);
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
     }
 }
