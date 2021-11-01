@@ -113,7 +113,6 @@ namespace NKSLK_CS
             cmd.Dispose();
             connection.Close();
         }
-
     }
 
 }
