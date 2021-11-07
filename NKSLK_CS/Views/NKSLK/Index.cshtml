@@ -1,8 +1,228 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model IEnumerable<NKSLK_CS.NKSLKModel>
 
-<h2>Index</h2>
+@{
+    var danhMucCongViec = (List<NKSLK_CS.DanhMucCongViec>)ViewBag.danhMucCongViec;
+    var sanPham = (List<NKSLK_CS.SanPham>)ViewBag.sanPham;
+    var congNhan = (List<NKSLK_CS.CongNhan>)ViewBag.congNhan;
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="heading_btn">
+                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModalNew">New</button>
+            </div>
+            <h3 class="heading_title">Table</h3>
+            <form style="float: right; margin-top:-48px;">
+                <input type="text" class="form-control search" placeholder=" Search">
+            </form>
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                <tr>
+                    <th>
+                        Ngày
+                    </th>
+                    <th>
+                        Công Việc
+                    </th>
+                    <th>
+                        Sản Phẩm
+                    </th>
+                    <th>
+                        Số Lượng Công Nhân
+                    </th>
+                    <th>
+                        Sản Lượng
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.congViec)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sanPham)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.soLuongCongNhan)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sanLuong)
+                        </td>
+                        <td>
+                            <a href="" class="btn-edit"><i class="fa fa-wrench"></i></a>
+                            <a href="" class="btn-delete"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('.btn-edit').click(function (e) {
+
+            e.preventDefault();
+
+            var $modal = $('#myModalEdit');
+            var $modalDialog = $('.modal-dialog');
+            var href = $(this).prop('href');
+
+            // không cho phép tắt modal khi click bên ngoài modal
+            var option = { backdrop: 'static' };
+
+            // load modal
+            $modalDialog.load(href, function () {
+                $modal.modal(option, 'show');
+            });
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        $('.btn-delete').click(function (e) {
+
+            e.preventDefault();
+
+            var $modal = $('#myModalDelete');
+            var $modalDialog = $('.modal-dialog');
+            var href = $(this).prop('href');
+
+            // không cho phép tắt modal khi click bên ngoài modal
+            var option = { backdrop: 'static' };
+
+            // load modal
+            $modalDialog.load(href, function () {
+                $modal.modal(option, 'show');
+            });
+        });
+
+    });
+</script>
+
+<div id="myModalEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        @*partialView*@
+    </div>
+</div>
+
+<div id="myModalDelete" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 25%">
+        @*partialView*@
+    </div>
+</div>
+
+
+<div id="myModalNew" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Thêm mới công nhân
+                            </header>
+                            <div class="panel-body">
+                                <form role="form" class="form-horizontal" method="post" action="/NKSLK/Create">
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Ngày</label>
+                                        <div class="col-lg-6">
+                                            <input type="date" placeholder="" name="ngay" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Ca</label>
+                                        <div class="col-lg-6">
+                                            <select class="w3-select w3-border" name="ca">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                <option value=1>Ca 1 (6:00 AM - 2:00 PM)</option>
+                                                <option value=2>Ca 2 (2:00 PM - 10:00 PM)</option>
+                                                <option value=3>Ca 3 (10:00 PM - 6:00 AM)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Công Việc</label>
+                                        <div class="col-lg-6">
+                                            <select class="w3-select w3-border" name="congViec">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach (var item in danhMucCongViec)
+                                                {
+                                                    <option value=@item.id>@item.ten</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Sản Phẩm</label>
+                                        <div class="col-lg-6">
+                                            <select class="w3-select w3-border" name="sanPham">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach (var item in sanPham)
+                                                {
+                                                    <option value=@item.id>@item.ten</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Số Lô </label>
+                                        <div class="col-lg-6">
+                                            <input type="date" placeholder="" name="soLo" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="col-lg-3 control-label">Công Nhân</label>
+                                        <div class="col-lg-6">
+                                            <select class="w3-select w3-border" name="congNhan">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                @foreach (var item in congNhan)
+                                                {
+                                                    <option value=@item.id>@item.ten</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-3 col-lg-6">
+                                            <button type="submit" class="btn btn-success">Tạo</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
