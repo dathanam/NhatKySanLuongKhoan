@@ -155,45 +155,33 @@
 
 <script>
     $(document).ready(function () {
-
         $('.btn-edit').click(function (e) {
-
             e.preventDefault();
-
             var $modal = $('#myModalEdit');
             var $modalDialog = $('.modal-dialog');
             var href = $(this).prop('href');
-
             // không cho phép tắt modal khi click bên ngoài modal
             var option = { backdrop: 'static' };
-
             // load modal
             $modalDialog.load(href, function () {
                 $modal.modal(option, 'show');
             });
         });
-
     });
 </script>
 <script>
     $(document).ready(function () {
-
         $('.btn-delete').click(function (e) {
-
             e.preventDefault();
-
             var $modal = $('#myModalDelete');
             var $modalDialog = $('.modal-dialog');
             var href = $(this).prop('href');
-
             // không cho phép tắt modal khi click bên ngoài modal
             var option = { backdrop: 'static' };
-
             // load modal
             $modalDialog.load(href, function () {
                 $modal.modal(option, 'show');
             });
         });
-
     });
 </script>

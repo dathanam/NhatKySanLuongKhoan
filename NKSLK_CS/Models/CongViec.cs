@@ -17,9 +17,7 @@ namespace NKSLK_CS
 
         public int id { get; set; }
 
-        [Required]
-        [StringLength(200)]
-        public string san_luong_thuc_te { get; set; }
+        public int san_luong_thuc_te { get; set; }
 
         public int so_lo { get; set; }
 

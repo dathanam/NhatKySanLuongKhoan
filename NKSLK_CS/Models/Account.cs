@@ -1,4 +1,4 @@
-namespace NKSLK_CS.Models
+namespace NKSLK_CS
 {
     using System;
     using System.Collections.Generic;

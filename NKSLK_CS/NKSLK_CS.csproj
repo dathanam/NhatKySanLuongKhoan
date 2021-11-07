@@ -134,25 +134,26 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NKSLKController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CaLamViec.cs" />
     <Compile Include="Models\CongNhan.cs" />
     <Compile Include="Models\CongViec.cs" />
     <Compile Include="Models\DanhMucCongNhanThucHienKhoan.cs" />
     <Compile Include="Models\DanhMucCongViec.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Models\DetailCongNhan.cs" />
     <Compile Include="Models\NhatKySanLuongKhoan.cs" />
     <Compile Include="Models\NKSLK_Context.cs" />
     <Compile Include="Models\PhongBan.cs" />
     <Compile Include="Models\Phuong.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quan.cs" />
     <Compile Include="Models\SanLuongKhoanTheoCa.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\ThanhPho.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -241,9 +242,10 @@
     <Content Include="Views\CongNhans\PartialEdit.cshtml" />
     <Content Include="Views\CongNhans\PartialDelete.cshtml" />
     <Content Include="Views\ChamCong\Index.cshtml" />
-    <Content Include="Views\DanhMucCongViecs\Index.cshtml" />
     <Content Include="Views\DanhMucCongViecs\PartialEdit.cshtml" />
     <Content Include="Views\DanhMucCongViecs\PartialDelete.cshtml" />
+    <Content Include="Views\CongNhans\Details.cshtml" />
+    <Content Include="Views\DanhMucCongViecs\Index.cshtml" />
     <None Include="Views\Login\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

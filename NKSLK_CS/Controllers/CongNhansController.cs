@@ -62,6 +62,35 @@ namespace NKSLK_CS.Controllers
             return model;
         }
 
+
+        public ActionResult Details(int? id)
+        {
+            ViewBag.Inner = new CongNhansController().getNKSLKTest(id);
+            return View();
+        }
+        public List<DetailCongNhanModel> getNKSLKTest(int? id)
+        {
+            var inner = (from CN in db.CongNhan
+                         join DMCN in db.DanhMucCongNhanThucHienKhoan on CN.id equals DMCN.id_cong_nhan
+                         join CV in db.CongViec on DMCN.id_cong_viec equals CV.id
+                         join DMCV in db.DanhMucCongViec on CV.id_danh_muc_cong_viec equals DMCV.id
+                         join SLTC in db.SanLuongKhoanTheoCa on DMCN.id_san_luong_khoan_theo_ca equals SLTC.id
+                         join CLV in db.CaLamViec on SLTC.id_ca equals CLV.id
+                         join NKSLK in db.NhatKySanLuongKhoan on SLTC.id_nkslk equals NKSLK.id
+                         where CN.id == id
+                         select new DetailCongNhanModel
+                         {
+                             tenCN = CN.ten,
+                             NgayLamViec = NKSLK.ngay,
+                             TenCa = CLV.ten,
+                             thoi_gian_den = DMCN.thoi_gian_den,
+                             thoi_gian_ve = DMCN.thoi_gian_ve,
+                             cong_viec = DMCV.ten,
+                             san_luong_thuc_te = CV.san_luong_thuc_te
+                         }).ToList();
+            return inner;
+        }
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,5 +148,7 @@ namespace NKSLK_CS.Controllers
 
             return RedirectToAction("Index");
         }
+
+
     }
 }
