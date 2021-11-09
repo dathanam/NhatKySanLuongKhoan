@@ -12,7 +12,7 @@ namespace NKSLK_CS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ThanhPho()
         {
-            Quan = new HashSet<Quan>();
+            Quans = new HashSet<Quan>();
         }
 
         public int id { get; set; }
@@ -22,6 +22,6 @@ namespace NKSLK_CS
         public string ten { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Quan> Quan { get; set; }
+        public virtual ICollection<Quan> Quans { get; set; }
     }
 }

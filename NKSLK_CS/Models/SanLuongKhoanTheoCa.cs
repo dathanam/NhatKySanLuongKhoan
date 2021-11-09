@@ -12,7 +12,7 @@ namespace NKSLK_CS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanLuongKhoanTheoCa()
         {
-            DanhMucCongNhanThucHienKhoan = new HashSet<DanhMucCongNhanThucHienKhoan>();
+            DanhMucCongNhanThucHienKhoans = new HashSet<DanhMucCongNhanThucHienKhoan>();
         }
 
         public int id { get; set; }
@@ -24,7 +24,7 @@ namespace NKSLK_CS
         public virtual CaLamViec CaLamViec { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DanhMucCongNhanThucHienKhoan> DanhMucCongNhanThucHienKhoan { get; set; }
+        public virtual ICollection<DanhMucCongNhanThucHienKhoan> DanhMucCongNhanThucHienKhoans { get; set; }
 
         public virtual NhatKySanLuongKhoan NhatKySanLuongKhoan { get; set; }
     }

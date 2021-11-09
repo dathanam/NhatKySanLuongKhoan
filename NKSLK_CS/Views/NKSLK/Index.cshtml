@@ -16,25 +16,19 @@
             <div class="heading_btn">
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModalNew">New</button>
             </div>
-            <h3 class="heading_title">Table</h3>
-            <form style="float: right; margin-top:-48px;">
-                <input type="text" class="form-control search" placeholder=" Search">
-            </form>
+            <h3 class="heading_title">Nhật Ký Sản Lượng Khoán</h3>
+            @*<form style="float: right; margin-top:-48px;">
+                    <input type="text" class="form-control search" placeholder=" Search">
+                </form>*@
         </div>
         <div>
-            <table class="table" ui-jq="footable" ui-options='{
-        "paging": {
-          "enabled": true
-        },
-        "filtering": {
-          "enabled": true
-        },
-        "sorting": {
-          "enabled": true
-        }}'>
+            <table class="table" ui-jq="footable">
                 <tr>
                     <th>
                         Ngày
+                    </th>
+                    <th>
+                        Ca
                     </th>
                     <th>
                         Công Việc
@@ -43,10 +37,13 @@
                         Sản Phẩm
                     </th>
                     <th>
-                        Số Lượng Công Nhân
+                        Số Công Nhân
                     </th>
                     <th>
-                        Sản Lượng
+                        Tổng Sản Lượng
+                    </th>
+                    <th>
+                        Chức Năng
                     </th>
                 </tr>
 
@@ -54,23 +51,27 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ngay)
+                            @item.ngay
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.congViec)
+                            @item.ca
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.sanPham)
+                            @item.congViec
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.soLuongCongNhan)
+                            @item.sanPham
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.sanLuong)
+                            @item.soLuongCongNhan
                         </td>
                         <td>
-                            <a href="" class="btn-edit"><i class="fa fa-wrench"></i></a>
-                            <a href="" class="btn-delete"><i class="fa fa-trash"></i></a>
+                            @item.sanLuong
+                        </td>
+                        <td>
+                            <a class="btn-detail" href="/NKSLK/Detail?NKSLK=@item.ngay&DMCV=@item.congViec&SP=@item.sanPham&ca=@item.ca"><i class="fa fa-eye"></i></a>
+                            <a class="btn-add-CN" href="/NKSLK/AddCN?idCV=@item.idCongViec&idSLK=@item.idSanLuongKhoan"><i class="fa fa-user-plus"></i></a>
+                            <a class="btn-delete" href="/NKSLK/Delete?NKSLK=@item.ngay&DMCV=@item.congViec&SP=@item.sanPham&ca=@item.ca&idCV=@item.idCongViec&idSLK=@item.idSanLuongKhoan"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 }
@@ -82,60 +83,77 @@
 <script>
     $(document).ready(function () {
 
-        $('.btn-edit').click(function (e) {
-
+        $('.btn-add-CN').click(function (e) {
             e.preventDefault();
-
-            var $modal = $('#myModalEdit');
+            var $modal = $('#myModalAddCN');
             var $modalDialog = $('.modal-dialog');
             var href = $(this).prop('href');
-
             // không cho phép tắt modal khi click bên ngoài modal
             var option = { backdrop: 'static' };
-
             // load modal
             $modalDialog.load(href, function () {
                 $modal.modal(option, 'show');
             });
         });
 
-    });
-</script>
-<script>
-    $(document).ready(function () {
+        $('.btn-detail').click(function (e) {
+            e.preventDefault();
+            var $modal = $('#myModalDetail');
+            var $modalDialog = $('.modal-dialog');
+            var href = $(this).prop('href');
+            // không cho phép tắt modal khi click bên ngoài modal
+            var option = { backdrop: 'static' };
+            // load modal
+            $modalDialog.load(href, function () {
+                $modal.modal(option, 'show');
+            });
+        });
 
         $('.btn-delete').click(function (e) {
-
             e.preventDefault();
-
             var $modal = $('#myModalDelete');
             var $modalDialog = $('.modal-dialog');
             var href = $(this).prop('href');
-
             // không cho phép tắt modal khi click bên ngoài modal
             var option = { backdrop: 'static' };
-
             // load modal
             $modalDialog.load(href, function () {
                 $modal.modal(option, 'show');
             });
         });
 
+        $('.btn_create').click(function (e) {
+            e.preventDefault();
+            var $modal = $('#myModalDelete');
+            var $modalDialog = $('.modal-dialog');
+            var href = $(this).prop('href');
+            // không cho phép tắt modal khi click bên ngoài modal
+            var option = { backdrop: 'static' };
+            // load modal
+            $modalDialog.load(href, function () {
+                $modal.modal(option, 'show');
+            });
+        });
     });
 </script>
 
-<div id="myModalEdit" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        @*partialView*@
+<div id="myModalAddCN" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 30%">
+        @*partialAddCN*@
     </div>
 </div>
 
 <div id="myModalDelete" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width: 25%">
+    <div class="modal-dialog" style="width: 30%">
         @*partialView*@
     </div>
 </div>
 
+<div id="myModalDetail" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        @*partialView*@
+    </div>
+</div>
 
 <div id="myModalNew" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -145,7 +163,7 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                                Thêm mới công nhân
+                                Thêm mới NKSLK
                             </header>
                             <div class="panel-body">
                                 <form role="form" class="form-horizontal" method="post" action="/NKSLK/Create">
@@ -153,7 +171,7 @@
                                     <div class="form-group has-success">
                                         <label class="col-lg-3 control-label">Ngày</label>
                                         <div class="col-lg-6">
-                                            <input type="date" placeholder="" name="ngay" class="form-control" required />
+                                            <input type="date" placeholder="" name="ngayTao" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
@@ -194,7 +212,7 @@
                                     <div class="form-group has-success">
                                         <label class="col-lg-3 control-label">Số Lô </label>
                                         <div class="col-lg-6">
-                                            <input type="date" placeholder="" name="soLo" class="form-control" required />
+                                            <input type="text" placeholder="" name="soLo" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group has-success">
@@ -210,7 +228,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="text-align:center">
                                         <div class="col-lg-offset-3 col-lg-6">
                                             <button type="submit" class="btn btn-success">Tạo</button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
@@ -225,4 +243,3 @@
         </div>
     </div>
 </div>
-

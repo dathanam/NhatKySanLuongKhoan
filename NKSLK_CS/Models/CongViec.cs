@@ -12,13 +12,11 @@ namespace NKSLK_CS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CongViec()
         {
-            DanhMucCongNhanThucHienKhoan = new HashSet<DanhMucCongNhanThucHienKhoan>();
+            DanhMucCongNhanThucHienKhoans = new HashSet<DanhMucCongNhanThucHienKhoan>();
         }
 
         public int id { get; set; }
 
-        [Required]
-        [StringLength(200)]
         public int san_luong_thuc_te { get; set; }
 
         public int so_lo { get; set; }
@@ -32,6 +30,6 @@ namespace NKSLK_CS
         public virtual SanPham SanPham { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DanhMucCongNhanThucHienKhoan> DanhMucCongNhanThucHienKhoan { get; set; }
+        public virtual ICollection<DanhMucCongNhanThucHienKhoan> DanhMucCongNhanThucHienKhoans { get; set; }
     }
 }

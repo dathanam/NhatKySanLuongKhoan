@@ -8,9 +8,12 @@ namespace NKSLK_CS
     public partial class NKSLKModel
     {
         public DateTime ngay { get; set; }
+        public int ca { get; set; }
         public string congViec { get; set; }
         public string sanPham { get; set; }
         public int soLuongCongNhan { get; set; }
         public int sanLuong { get; set; }
+        public int idSanLuongKhoan { get; set; }
+        public int idCongViec { get; set; }
     }
 }

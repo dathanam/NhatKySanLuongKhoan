@@ -23,8 +23,7 @@ namespace NKSLK_CS
         public virtual DbSet<Quan> Quan { get; set; }
         public virtual DbSet<SanLuongKhoanTheoCa> SanLuongKhoanTheoCa { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<ThanhPho> ThanhPho { get; set; }
+        public virtual DbSet<ThanhPho> ThanhPhoe { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,17 +40,17 @@ namespace NKSLK_CS
                 .HasPrecision(2);
 
             modelBuilder.Entity<CaLamViec>()
-                .HasMany(e => e.SanLuongKhoanTheoCa)
+                .HasMany(e => e.SanLuongKhoanTheoCas)
                 .WithOptional(e => e.CaLamViec)
                 .HasForeignKey(e => e.id_ca);
 
             modelBuilder.Entity<CongNhan>()
-                .HasMany(e => e.DanhMucCongNhanThucHienKhoan)
+                .HasMany(e => e.DanhMucCongNhanThucHienKhoans)
                 .WithOptional(e => e.CongNhan)
                 .HasForeignKey(e => e.id_cong_nhan);
 
             modelBuilder.Entity<CongViec>()
-                .HasMany(e => e.DanhMucCongNhanThucHienKhoan)
+                .HasMany(e => e.DanhMucCongNhanThucHienKhoans)
                 .WithOptional(e => e.CongViec)
                 .HasForeignKey(e => e.id_cong_viec);
 
@@ -64,42 +63,42 @@ namespace NKSLK_CS
                 .HasPrecision(2);
 
             modelBuilder.Entity<DanhMucCongViec>()
-                .HasMany(e => e.CongViec)
+                .HasMany(e => e.CongViecs)
                 .WithOptional(e => e.DanhMucCongViec)
                 .HasForeignKey(e => e.id_danh_muc_cong_viec);
 
             modelBuilder.Entity<NhatKySanLuongKhoan>()
-                .HasMany(e => e.SanLuongKhoanTheoCa)
+                .HasMany(e => e.SanLuongKhoanTheoCas)
                 .WithOptional(e => e.NhatKySanLuongKhoan)
                 .HasForeignKey(e => e.id_nkslk);
 
             modelBuilder.Entity<PhongBan>()
-                .HasMany(e => e.CongNhan)
+                .HasMany(e => e.CongNhans)
                 .WithOptional(e => e.PhongBan)
                 .HasForeignKey(e => e.id_phong_ban);
 
             modelBuilder.Entity<Phuong>()
-                .HasMany(e => e.CongNhan)
+                .HasMany(e => e.CongNhans)
                 .WithOptional(e => e.Phuong)
                 .HasForeignKey(e => e.id_phuong);
 
             modelBuilder.Entity<Quan>()
-                .HasMany(e => e.Phuong)
+                .HasMany(e => e.Phuongs)
                 .WithOptional(e => e.Quan)
                 .HasForeignKey(e => e.id_quan);
 
             modelBuilder.Entity<SanLuongKhoanTheoCa>()
-                .HasMany(e => e.DanhMucCongNhanThucHienKhoan)
+                .HasMany(e => e.DanhMucCongNhanThucHienKhoans)
                 .WithOptional(e => e.SanLuongKhoanTheoCa)
                 .HasForeignKey(e => e.id_san_luong_khoan_theo_ca);
 
             modelBuilder.Entity<SanPham>()
-                .HasMany(e => e.CongViec)
+                .HasMany(e => e.CongViecs)
                 .WithOptional(e => e.SanPham)
                 .HasForeignKey(e => e.id_sanpham);
 
             modelBuilder.Entity<ThanhPho>()
-                .HasMany(e => e.Quan)
+                .HasMany(e => e.Quans)
                 .WithOptional(e => e.ThanhPho)
                 .HasForeignKey(e => e.id_thanh_pho);
         }

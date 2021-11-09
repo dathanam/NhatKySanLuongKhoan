@@ -1,0 +1,58 @@
+﻿@{
+    var NKSLK = ViewBag.NKSLK;
+    var DMCV = ViewBag.DMCV;
+    var SP = ViewBag.SP;
+    var ca = ViewBag.ca;
+    var idCongViec = ViewBag.idCongViec;
+    var idSanLuongKhoan = ViewBag.idSanLuongKhoan;
+}
+
+<div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Bạn có chắc chắn muốn xóa NKSLK
+                        </header>
+                        <div class="panel-body">
+                            <form style="display: grid" action="/NKSLK/Delete" method="post">
+                                <input type="hidden" name="idCongViec" value=@idCongViec />
+                                <input type="hidden" name="idSanLuongKhoan" value=@idSanLuongKhoan />
+                                <div class="form-group has-success">
+                                    <label style="margin-top: 10px" class="col-lg-6 control-label">Ngày</label>
+                                    <div class="col-lg-6">
+                                        <h5>@NKSLK</h5>
+                                    </div>
+                                </div>
+                                <div class="form-group has-success">
+                                    <label style="margin-top: 10px" class="col-lg-6 control-label">Ca</label>
+                                    <div class="col-lg-6">
+                                        <h5>@ca</h5>
+                                    </div>
+                                </div>
+                                <div class="form-group has-success">
+                                    <label style="margin-top: 10px" class="col-lg-6 control-label">Công việc</label>
+                                    <div class="col-lg-6">
+                                        <h5>@DMCV</h5>
+                                    </div>
+                                </div>
+                                <div class="form-group has-success">
+                                    <label style="margin-top: 10px" class="col-lg-6 control-label">Sản phẩm</label>
+                                    <div class="col-lg-6">
+                                        <h5>@SP</h5>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-3 col-lg-6">
+                                        <button type="submit" class="btn btn-success">Xoá</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+</div>

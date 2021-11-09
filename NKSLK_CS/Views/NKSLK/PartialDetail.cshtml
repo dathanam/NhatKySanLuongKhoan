@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NKSLK_CS.NKSLKDetail>
+
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Chi tiết NKSLK
+                    </header>
+                    <div>
+                        <table class="table" ui-jq="footable">
+                            <tr>
+                                <th>
+                                    Tên
+                                </th>
+                                <th>
+                                    Thời gian đến
+                                </th>
+                                <th>
+                                    Thời gian về
+                                </th>
+                                <th>
+                                    Sản lượng
+                                </th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.tenCongNhan
+                                    </td>
+                                    <td>
+                                        @item.thoi_gian_den
+                                    </td>
+                                    <td>
+                                        @item.thoi_gian_ve
+                                    </td>
+                                    <td>
+                                        @item.sanLuong
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        <div class="form-group" style="text-align: center">
+                            <div class="col-lg-offset-3 col-lg-6">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
