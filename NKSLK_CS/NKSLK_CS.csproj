@@ -133,6 +133,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NKSLKController.cs" />
     <Compile Include="Controllers\PhongBansController.cs" />
+    <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CaLamViec.cs" />
     <Compile Include="Models\CongNhan.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Models\NKSLK_Context.cs" />
     <Compile Include="Models\PhongBan.cs" />
     <Compile Include="Models\Phuong.cs" />
+    <Compile Include="Models\taikhoan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quan.cs" />
     <Compile Include="Models\SanLuongKhoanTheoCa.cs" />
@@ -258,6 +260,10 @@
     <Content Include="Views\PhongBans\Index.cshtml" />
     <Content Include="Views\PhongBans\PartialDelete.cshtml" />
     <Content Include="Views\PhongBans\PartialEdit.cshtml" />
+    <Content Include="Views\TaiKhoan\Index.cshtml" />
+    <Content Include="Views\TaiKhoan\Create.cshtml" />
+    <Content Include="Views\TaiKhoan\Edit.cshtml" />
+    <Content Include="Views\TaiKhoan\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -408,7 +408,7 @@ F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\bin\System.Web.WebPages.Ra
 F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\bin\Newtonsoft.Json.xml
 F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\bin\Antlr3.Runtime.pdb
 F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.AssemblyReference.cache
 F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.CoreCompileInputs.cache
 F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.dll
 F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.pdb
+F:\HV_KTQS\Client_Server\NhatKySanLuongKhoan\NKSLK_CS\obj\Debug\NKSLK_CS.csproj.CopyComplete
