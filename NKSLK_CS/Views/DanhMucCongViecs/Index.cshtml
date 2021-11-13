@@ -14,13 +14,11 @@
             <h3 class="heading_title">Danh mục công việc</h3>
         </div>
         <div class="formSearch" style="margin-top: 10px; margin-right: 150px; margin-left: 150px; ">
-            <form>
+            <form action="/DanhMucCongViecs/Search" method="post">
                 <div class="searchDetail" style="width: 40%;">
-                    <select class="w3-select w3-border" name="id_phong_ban" required>
+                    <select class="w3-select w3-border" name="category" required>
                         <option value="" disabled selected>Chọn chủ đề...</option>
-                        <option value=""> Tên công nhân </option>
-                        <option value=""> Tuổi </option>
-                        <option value=""> Phòng ban </option>
+                        <option value="1"> Tên danh mục công việc </option>
                     </select>
                 </div>
                 <div class="searchInput" style="width: 40%; float: right; display: flex; margin-top: -40px; ">

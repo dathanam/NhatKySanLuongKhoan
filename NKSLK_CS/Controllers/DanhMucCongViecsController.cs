@@ -23,17 +23,12 @@ namespace NKSLK_CS.Controllers
         // GET: DanhMucCongViecs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DanhMucCongViec danhMucCongViec)
+        public ActionResult Create(DanhMucCongViec model)
         {
-            if (ModelState.IsValid)
-            {
-                db.DanhMucCongViec.Add(danhMucCongViec);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(danhMucCongViec);
+            db.DanhMucCongViec.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-
         // GET: DanhMucCongViecs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -62,8 +57,6 @@ namespace NKSLK_CS.Controllers
                 result.don_vi_khoan = danhMucCongViec.don_vi_khoan;
                 result.he_so_khoan = danhMucCongViec.he_so_khoan;
                 result.dinh_muc_lao_dong = danhMucCongViec.dinh_muc_lao_dong;
-                result.don_gia = danhMucCongViec.don_gia;
-
                 db.SaveChanges();
             }
 
@@ -92,6 +85,24 @@ namespace NKSLK_CS.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Search(string searchString, int category)
+        {
+            List<DanhMucCongViec> danhMucCongViec = new List<DanhMucCongViec>();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                if (category == 1)
+                {
+                    danhMucCongViec = db.DanhMucCongViec.Where(x => x.ten.Contains(searchString)).ToList();
+                }
+            }
+            else
+            {
+                danhMucCongViec = db.DanhMucCongViec.Where(x => x.id != 0).ToList();
+            }
+            return View("Index", danhMucCongViec);
         }
     }
 }

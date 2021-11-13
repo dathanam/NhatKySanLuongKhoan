@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<NKSLK_CS.CongNhan>
 @{
     var phongbans = (List<NKSLK_CS.PhongBan>)ViewBag.phongban;
-    var phuong = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
+    var phuongs = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
 }
 
 <div class="table-agile-info">
@@ -13,13 +13,14 @@
             <h3 class="heading_title">Công Nhân</h3>
         </div>
         <div class="formSearch" style="margin-top: 10px; margin-right: 150px; margin-left: 150px; ">
-            <form>
+            <form action="/CongNhans/Search" method="post">
                 <div class="searchDetail" style="width: 40%;">
-                    <select class="w3-select w3-border" name="id_phong_ban" required>
+                    <select class="w3-select w3-border" name="category" required>
                         <option value="" disabled selected>Chọn chủ đề...</option>
-                        <option value=""> Tên công nhân </option>
-                        <option value=""> Tuổi </option>
-                        <option value=""> Phòng ban </option>
+                        <option value="1"> Tên công nhân </option>
+                        <option value="2"> Tuổi </option>
+                        <option value="3"> Phòng ban </option>
+                        <option value="4"> Quê quán </option>
                     </select>
                 </div>
                 <div class="searchInput" style="width: 40%; float: right; display: flex; margin-top: -40px; ">
@@ -41,22 +42,25 @@
         }}'>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ten)
+                        Tên công nhân
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ngay_sinh)
+                        Ngày sinh
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.gioi_tinh)
+                        Giới tính
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.PhongBan)
+                        Phòng Ban
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.chuc_vu)
+                        Chức vụ
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.que_quan)
+                        Quê quán
+                    </th>
+                    <th>
+                        Huyện
                     </th>
                     <th>
                         Action
@@ -87,6 +91,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.que_quan)
                         </td>
+                        @foreach (Phuong icon in phuongs.Where(n => n.id == item.id_phuong))
+                        {
+                            <td>
+                                @icon.ten
+                            </td>
+                        }
                         <td>
                             <a href="/CongNhans/Details/@item.id" class="btn-large"><i class="fa fa-info"></i></a>
                             <a href="/CongNhans/Edit/@item.id" class="btn-edit"><i class="fa fa-wrench"></i></a>
@@ -187,7 +197,7 @@
                                         <div class="col-lg-6">
                                             <select class="w3-select w3-border" name="id_phuong" required>
                                                 <option value="" disabled selected>Choose your option</option>
-                                                @foreach (Phuong item in phuong)
+                                                @foreach (Phuong item in phuongs)
                                                 {
                                                     <option value=@item.id>@item.ten</option>
                                                 }

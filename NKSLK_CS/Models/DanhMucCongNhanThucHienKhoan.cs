@@ -21,6 +21,8 @@ namespace NKSLK_CS
 
         public int? id_cong_viec { get; set; }
 
+        public int san_luong_thuc_te { get; set; }
+
         public virtual CongNhan CongNhan { get; set; }
 
         public virtual CongViec CongViec { get; set; }

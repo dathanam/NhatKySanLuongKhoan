@@ -24,7 +24,6 @@ namespace NKSLK_CS
         public virtual DbSet<Quan> Quan { get; set; }
         public virtual DbSet<SanLuongKhoanTheoCa> SanLuongKhoanTheoCa { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<ThanhPho> ThanhPho { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

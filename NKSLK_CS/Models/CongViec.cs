@@ -17,8 +17,6 @@ namespace NKSLK_CS
 
         public int id { get; set; }
 
-        public int san_luong_thuc_te { get; set; }
-
         public int so_lo { get; set; }
 
         public int? id_sanpham { get; set; }

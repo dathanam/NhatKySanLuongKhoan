@@ -23,21 +23,6 @@ namespace NKSLK_CS.Controllers
             return View(CongNhan);
         }
 
-        // GET: CongNhans/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    CongNhan congNhan = db.CongNhan.Find(id);
-        //    if (congNhan == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(congNhan);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CongNhan congNhan)
@@ -45,8 +30,8 @@ namespace NKSLK_CS.Controllers
             if (ModelState.IsValid)
             {
                 db.CongNhan.Add(congNhan);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(congNhan);
         }
@@ -86,7 +71,7 @@ namespace NKSLK_CS.Controllers
                              thoi_gian_den = DMCN.thoi_gian_den,
                              thoi_gian_ve = DMCN.thoi_gian_ve,
                              cong_viec = DMCV.ten,
-                             san_luong_thuc_te = CV.san_luong_thuc_te
+                             san_luong_thuc_te = DMCN.san_luong_thuc_te
                          }).ToList();
             return inner;
         }
@@ -138,10 +123,11 @@ namespace NKSLK_CS.Controllers
             {
                 result.ten = congNhan.ten;
                 result.ngay_sinh = congNhan.ngay_sinh;
-                result.PhongBan.ten = congNhan.PhongBan.ten;
                 result.chuc_vu = congNhan.chuc_vu;
                 result.luong_hop_dong = congNhan.luong_hop_dong;
                 result.luong_bao_hiem = congNhan.luong_bao_hiem;
+                result.PhongBan.ten = congNhan.PhongBan.ten;
+                result.Phuong.ten = congNhan.Phuong.ten;
 
                 db.SaveChanges();
             }
@@ -149,6 +135,45 @@ namespace NKSLK_CS.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Search(string searchString, int category)
+        {
+            List<CongNhan> congNhan = new List<CongNhan>();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                if (category == 1)
+                {
+                    congNhan = db.CongNhan.Where(x => x.ten.Contains(searchString)).ToList();
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                }
+                else if (category == 2)
+                {
+                    congNhan = db.CongNhan.SqlQuery("select * from CongNhan where DATEDIFF(year,CongNhan.ngay_sinh,GETDATE()) =" + searchString).ToList();
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                }
+                else if (category == 3)
+                {
+                    congNhan = db.CongNhan.SqlQuery("select * from CongNhan, PhongBan where CongNhan.id_phong_ban = PhongBan.id and PhongBan.ten like N'%" + searchString + "%'").ToList();
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                }
+                else if (category == 4)
+                {
+                    congNhan = db.CongNhan.SqlQuery("select * from CongNhan, Phuong where CongNhan.id_phuong = Phuong.id and Phuong.ten like N'%" + searchString + "%'").ToList();
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                }
+            }
+            else
+            {
+                congNhan = db.CongNhan.Where(x => x.id != 0).ToList();
+                ViewBag.phongban = new CongNhansController().Chucvu();
+                ViewBag.phuong = new CongNhansController().getPhuong();
+            }
+            return View("Index", congNhan);
+        }
 
     }
 }
