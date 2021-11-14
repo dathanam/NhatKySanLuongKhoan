@@ -93,12 +93,21 @@ namespace NKSLK_CS.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            CongNhan congNhan = db.CongNhan.Find(id);
-            db.CongNhan.Remove(congNhan);
-            db.SaveChanges();
+            DanhMucCongNhanThucHienKhoan NK = db.DanhMucCongNhanThucHienKhoan.Where(x => x.id_cong_nhan == id).FirstOrDefault();
+            if(NK != null)
+            {
+                TempData["msg"] = "<script>alert('Cong nhan da co NKSLK. Khong the xoa!');</script>";
+            }   
+            else
+            {
+                CongNhan congNhan = db.CongNhan.Find(id);
+                db.CongNhan.Remove(congNhan);
+                db.SaveChanges();
+            }    
 
             return RedirectToAction("Index");
         }
+
 
         public ActionResult Edit(int? id)
         {
@@ -115,6 +124,18 @@ namespace NKSLK_CS.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "id,ten,ngay_sinh,gioi_tinh,chuc_vu,que_quan,luong_hop_dong,luong_bao_hiem,id_phong_ban,id_phuong")] CongNhan congNhan)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(congNhan).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //    }
+        //    ViewBag.id_phong_ban = new SelectList(db.PhongBan, "id", "ten", congNhan.id_phong_ban);
+        //    ViewBag.id_phuong = new SelectList(db.Phuong, "id", "ten", congNhan.id_phuong);
+        //    return RedirectToAction("Index");
+        //}
         public ActionResult Edit(CongNhan congNhan)
         {
             var result = db.CongNhan.SingleOrDefault(b => b.id == congNhan.id);
@@ -126,8 +147,8 @@ namespace NKSLK_CS.Controllers
                 result.chuc_vu = congNhan.chuc_vu;
                 result.luong_hop_dong = congNhan.luong_hop_dong;
                 result.luong_bao_hiem = congNhan.luong_bao_hiem;
-                result.PhongBan.ten = congNhan.PhongBan.ten;
-                result.Phuong.ten = congNhan.Phuong.ten;
+                //    result.id_phong_ban = congNhan.id_phong_ban;
+                //    result.id_phuong = congNhan.id_phuong;
 
                 db.SaveChanges();
             }

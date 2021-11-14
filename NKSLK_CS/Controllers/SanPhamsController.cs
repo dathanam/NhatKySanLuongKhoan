@@ -80,10 +80,17 @@ namespace NKSLK_CS.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            SanPham sanPham = db.SanPham.Find(id);
-            db.SanPham.Remove(sanPham);
-            db.SaveChanges();
-
+            DanhMucCongNhanThucHienKhoan NK = db.DanhMucCongNhanThucHienKhoan.Where(x => x.id_cong_nhan == id).FirstOrDefault();
+            if (NK != null)
+            {
+                TempData["msg"] = "<script>alert('San pham da co trong NKSLK. Khong the xoa!');</script>";
+            }
+            else
+            {
+                SanPham sanPham = db.SanPham.Find(id);
+                db.SanPham.Remove(sanPham);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
@@ -97,16 +104,14 @@ namespace NKSLK_CS.Controllers
                 {
                     sanPham = db.SanPham.Where(x => x.ten.Contains(searchString)).ToList();
                 }
-                //else if (category == 2)
-                //{
-                //    sanPham = db.SanPham.SqlQuery("select * from SanPham where ((DATEDIFF(year, ngay_san_xuat, han_su_dung)) >=" + searchString).ToList();
-                //}
-                //else
-                //{
-                //    congNhan = db.CongNhan.SqlQuery("select * from CongNhan, PhongBan where PhongBan.ten like '%" + searchString + "%'").ToList();
-                //    ViewBag.phongban = new CongNhansController().Chucvu();
-                //    ViewBag.phuong = new CongNhansController().getPhuong();
-                //}
+                else if (category == 2)
+                {
+                    sanPham = db.SanPham.SqlQuery("select * from SanPham where (DATEDIFF(year, ngay_san_xuat, han_su_dung)) >= " + searchString).ToList();
+                }
+                else
+                {
+                    sanPham = db.SanPham.SqlQuery("select * from SanPham where SanPham.ngay_dang_ky <= '" + searchString + "'").ToList();
+                }
             }
             else
             {

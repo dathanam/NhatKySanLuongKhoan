@@ -3,7 +3,7 @@
     var phongbans = (List<NKSLK_CS.PhongBan>)ViewBag.phongban;
     var phuongs = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
 }
-
+@Html.Raw(TempData["msg"])
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -99,8 +99,8 @@
                         }
                         <td>
                             <a href="/CongNhans/Details/@item.id" class="btn-large"><i class="fa fa-info"></i></a>
-                            <a href="/CongNhans/Edit/@item.id" class="btn-edit"><i class="fa fa-wrench"></i></a>
-                            <a href="/CongNhans/Delete/@item.id" class="btn-delete"><i class="fa fa-trash"></i></a>
+                            <a href="/CongNhans/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                            <a href="/CongNhans/Delete/@item.id" class="btn-load"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 }
@@ -109,14 +109,8 @@
     </div>
 </div>
 
-<div id="myModalEdit" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        @*partialView*@
-    </div>
-</div>
-
-<div id="myModalDelete" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width: 25%">
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
         @*partialView*@
     </div>
 </div>
@@ -222,35 +216,11 @@
 
 <script>
     $(document).ready(function () {
-
-        $('.btn-edit').click(function (e) {
-
+        $('.btn-load').click(function (e) {
             e.preventDefault();
 
-            var $modal = $('#myModalEdit');
-            var $modalDialog = $('.modal-dialog');
-            var href = $(this).prop('href');
-
-            // không cho phép tắt modal khi click bên ngoài modal
-            var option = { backdrop: 'static' };
-
-            // load modal
-            $modalDialog.load(href, function () {
-                $modal.modal(option, 'show');
-            });
-        });
-
-    });
-</script>
-<script>
-    $(document).ready(function () {
-
-        $('.btn-delete').click(function (e) {
-
-            e.preventDefault();
-
-            var $modal = $('#myModalDelete');
-            var $modalDialog = $('.modal-dialog');
+            var $modal = $('#myModal');
+            var $modalDialog = $('.modal_dialog');
             var href = $(this).prop('href');
 
             // không cho phép tắt modal khi click bên ngoài modal

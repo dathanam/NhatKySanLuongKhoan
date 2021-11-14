@@ -41,18 +41,19 @@
                                     <input type="text" class="form-control" value="@Model.luong_bao_hiem" name="luong_bao_hiem" />
                                 </div>
                             </div>
-                            <div class="form-group has-success">
+                            @*<div class="form-group has-success">
                                 <label class="col-lg-5 control-label">Phòng Ban</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.PhongBan.ten" name="phong_ban" />
+                                    @Html.DropDownList("id_phong_ban", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.id_phong_ban, "", new { @class = "text-danger" })
                                 </div>
-                            </div>
-                            <div class="form-group has-success">
+                            </div>*@
+                            @*<div class="form-group has-success">
                                 <label class="col-lg-5 control-label">Phòng Ban</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.Phuong.ten" name="phuong" />
+                                    <input type="text" class="form-control" value="@Model.Phuong.ten" name="id_phuong" />
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="form-group">
                                 <div class="col-lg-offset-3 col-lg-6">
                                     <button type="submit" class="btn btn-success">Cập nhật</button>

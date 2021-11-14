@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ThongKeLuongsController.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Models\NKSLK_Context.cs" />
     <Compile Include="Models\PhongBan.cs" />
     <Compile Include="Models\Phuong.cs" />
+    <Compile Include="Models\TKLuongSanPham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quan.cs" />
     <Compile Include="Models\SanLuongKhoanTheoCa.cs" />
@@ -262,6 +264,7 @@
     <Content Include="Views\SanPhams\Index.cshtml" />
     <Content Include="Views\SanPhams\PartialDelete.cshtml" />
     <Content Include="Views\SanPhams\PartialEdit.cshtml" />
+    <Content Include="Views\ThongKeLuongs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -80,9 +80,17 @@ namespace NKSLK_CS.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            DanhMucCongViec danhMucCongViec = db.DanhMucCongViec.Find(id);
-            db.DanhMucCongViec.Remove(danhMucCongViec);
-            db.SaveChanges();
+            DanhMucCongNhanThucHienKhoan NK = db.DanhMucCongNhanThucHienKhoan.Where(x => x.id_cong_nhan == id).FirstOrDefault();
+            if (NK != null)
+            {
+                TempData["msg"] = "<script>alert('Danh muc cong viec da co trong NKSLK. Khong the xoa!');</script>";
+            }
+            else
+            {
+                DanhMucCongViec danhMucCongViec = db.DanhMucCongViec.Find(id);
+                db.DanhMucCongViec.Remove(danhMucCongViec);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
