@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NKSLK_CS;
+using PagedList;
 
 namespace NKSLK_CS.Controllers
 {
@@ -15,12 +16,12 @@ namespace NKSLK_CS.Controllers
         private NKSLK_Context db = new NKSLK_Context();
 
         // GET: CongNhans
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 5)
         {
             var CongNhan = db.CongNhan.Where(x => x.id != 0);
             ViewBag.phongban = new CongNhansController().Chucvu();
             ViewBag.phuong = new CongNhansController().getPhuong();
-            return View(CongNhan);
+            return View(CongNhan.OrderByDescending(x => x.id).ToPagedList(page, pageSize));
         }
 
         [HttpPost]

@@ -1,5 +1,6 @@
-﻿@model IEnumerable<NKSLK_CS.DanhMucCongViec>
-
+﻿
+@model PagedList.IPagedList<NKSLK_CS.DanhMucCongViec>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -40,22 +41,22 @@
         }}'>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ten)
+                        Tên danh mục công việc
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.dinh_muc_khoan)
+                        Định mức khoán
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.don_vi_khoan)
+                        Đơn vị khoán
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.he_so_khoan)
+                        Hệ số khoán
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.dinh_muc_lao_dong)
+                        Định mức lao động
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.don_gia)
+                        Đơn giá
                     </th>
                     <th></th>
                 </tr>
@@ -87,8 +88,14 @@
                         </td>
                     </tr>
                 }
-
             </table>
+            <br />
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            <style>
+                .pagination-container {
+                    text-align: center;
+                }
+            </style>
         </div>
     </div>
 </div>

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<NKSLK_CS.CongNhan>
+﻿
+@model PagedList.IPagedList<NKSLK_CS.CongNhan>
+@using PagedList.Mvc;
 @{
     var phongbans = (List<NKSLK_CS.PhongBan>)ViewBag.phongban;
     var phuongs = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
@@ -105,6 +107,13 @@
                     </tr>
                 }
             </table>
+            <br />
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            <style>
+                .pagination-container {
+                    text-align: center;
+                }
+            </style>
         </div>
     </div>
 </div>

@@ -17,7 +17,10 @@
             <form action="/SanPhams/Search" method="post">
                 <div class="searchDetail" style="width: 40%;">
                     <select class="w3-select w3-border" name="category" required>
+                        <option value="" disabled selected>Chọn chủ đề...</option>
                         <option value="1"> Thống kê theo tuần </option>
+                        <option value="1"> Thống kê theo tháng </option>
+                        <option value="1"> Tìm kiếm theo tên CN </option>
                     </select>
                 </div>
                 <div class="searchInput" style="width: 40%; float: right; display: flex; margin-top: -40px; ">
@@ -56,13 +59,13 @@
                             @item.id
                         </td>
                         <td>
-                            @item.tenCN
+                            @item.ten
                         </td>
                         <td>
-                            @item.LuongSP
+                            @item.luongSanPham
                         </td>
                         <td>
-                            @* <a href="/ThongKeLuong/Details/@item.id" class="btn-large"><i class="fa fa-info"></i></a>*@
+                            <a href="/ThongKeLuongs/Details/@item.id" class="btn-large"><i class="fa fa-info"></i></a>
                         </td>
                     </tr>
 

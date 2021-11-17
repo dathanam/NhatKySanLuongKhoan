@@ -1,5 +1,6 @@
-﻿@model IEnumerable<NKSLK_CS.SanPham>
-
+﻿
+@model PagedList.IPagedList<NKSLK_CS.SanPham>
+@using PagedList.Mvc;
 <script>
     $(document).ready(function () {
 
@@ -60,22 +61,22 @@
         }}'>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ten)
+                        Tên sản phẩm
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.so_dang_ky)
+                        Số đăng ký
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ngay_dang_ky)
+                        Ngày đăng ký
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ngay_san_xuat)
+                        Ngày sản xuất
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.han_su_dung)
+                        Hạn sử dụng
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.quy_cach)
+                        Quy cách
                     </th>
                     <th></th>
                 </tr>
@@ -109,6 +110,13 @@
                 }
 
             </table>
+            <br />
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            <style>
+                .pagination-container {
+                    text-align: center;
+                }
+            </style>
         </div>
     </div>
 </div>

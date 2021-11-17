@@ -9,7 +9,7 @@
     public partial class TKLuongSanPhamModel
     {
         public int id { get; set; }
-        public string tenCN { get; set; }
-        public float LuongSP { get; set; }
+        public string ten { get; set; }
+        public double? luongSanPham { get; set; }
     }
 }
