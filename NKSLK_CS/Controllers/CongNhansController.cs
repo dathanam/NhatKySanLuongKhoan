@@ -157,8 +157,22 @@ namespace NKSLK_CS.Controllers
             return RedirectToAction("Index");
         }
 
+        public List<SearchCongNhanTheoCa> TimKiemTheoCa(string searchString)
+        {
+            var rs = db.Database.SqlQuery<SearchCongNhanTheoCa>("select CongNhan.ten as tenCN, DanhMucCongNhanThucHienKhoan.thoi_gian_den, " +
+                "DanhMucCongNhanThucHienKhoan.thoi_gian_ve, NhatKySanLuongKhoan.ngay as NgayLamViec, SanLuongKhoanTheoCa.id_ca, CongViec.id, DanhMucCongViec.ten as tenCV " +
+                "from CongNhan, DanhMucCongNhanThucHienKhoan, SanLuongKhoanTheoCa, CongViec, DanhMucCongViec, NhatKySanLuongKhoan " +
+                "where NhatKySanLuongKhoan.id = SanLuongKhoanTheoCa.id_nkslk " +
+                "and CongNhan.id = DanhMucCongNhanThucHienKhoan.id_cong_nhan " +
+                "and DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca = SanLuongKhoanTheoCa.id " +
+                "and DanhMucCongNhanThucHienKhoan.id_cong_viec = CongViec.id " +
+                "and CongViec.id_danh_muc_cong_viec = DanhMucCongViec.id " +
+                "and SanLuongKhoanTheoCa.id_ca = " + searchString).ToList();
+            return rs;
+        }
+
         [HttpPost]
-        public ActionResult Search(string searchString, int category)
+        public ActionResult Search(string searchString, int category, int page = 1, int pageSize = 5)
         {
             List<CongNhan> congNhan = new List<CongNhan>();
             if (!String.IsNullOrEmpty(searchString))
@@ -187,6 +201,13 @@ namespace NKSLK_CS.Controllers
                     ViewBag.phongban = new CongNhansController().Chucvu();
                     ViewBag.phuong = new CongNhansController().getPhuong();
                 }
+                else if (category == 5)
+                {
+                    ViewBag.Inner = new CongNhansController().TimKiemTheoCa(searchString);
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                    return View("Search_CN_theo_ca");
+                }
             }
             else
             {
@@ -194,7 +215,7 @@ namespace NKSLK_CS.Controllers
                 ViewBag.phongban = new CongNhansController().Chucvu();
                 ViewBag.phuong = new CongNhansController().getPhuong();
             }
-            return View("Index", congNhan);
+            return View("Index", congNhan.OrderByDescending(x => x.id).ToPagedList(page, pageSize));
         }
 
     }

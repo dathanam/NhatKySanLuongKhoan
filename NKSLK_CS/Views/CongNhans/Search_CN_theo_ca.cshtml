@@ -1,0 +1,78 @@
+﻿@model IEnumerable<NKSLK_CS.SearchCongNhanTheoCa>
+@{
+    ViewBag.Title = "SearchTheoCa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var rs = (List<NKSLK_CS.SearchCongNhanTheoCa>)ViewBag.Inner;
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="heading_title">Công Nhân</h3>
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                <tr>
+                    <th>
+                        Tên CN
+                    </th>
+                    <th>
+                        Ngày làm việc
+                    </th>
+                    <th>
+                        Tên ca
+                    </th>
+                    <th>
+                        Thời gian đến
+                    </th>
+                    <th>
+                        Thời gian về
+                    </th>
+                    <th>
+                        Công việc
+                    </th>
+                </tr>
+
+                @foreach (var item in rs)
+                {
+                    <tr>
+                        <td>
+                            @item.tenCN
+                        </td>
+                        <td>
+                            @item.NgayLamViec
+                        </td>
+                        <td>
+                            @item.id_ca
+                        </td>
+                        <td>
+                            @item.thoi_gian_den
+                        </td>
+                        <td>
+                            @item.thoi_gian_ve
+                        </td>
+                        <td>
+                            @item.tenCV
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="heading_btn">
+                <button type="button" class="btn btn-outline-success"><a href="/CongNhans/Index">Back</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -10,6 +10,7 @@
     {
         public int id { get; set; }
         public string ten { get; set; }
+        public DateTime NgayLamViec { get; set; }
         public double? luongSanPham { get; set; }
     }
 }

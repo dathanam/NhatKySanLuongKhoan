@@ -97,7 +97,7 @@ namespace NKSLK_CS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(string searchString, int category)
+        public ActionResult Search(string searchString, int category, int page = 1, int pageSize = 5)
         {
             List<SanPham> sanPham = new List<SanPham>();
             if (!String.IsNullOrEmpty(searchString))
@@ -119,7 +119,7 @@ namespace NKSLK_CS.Controllers
             {
                 sanPham = db.SanPham.Where(x => x.id != 0).ToList();
             }
-            return View("Index", sanPham);
+            return View("Index", sanPham.OrderByDescending(x => x.id).ToPagedList(page, pageSize));
         }
     }
 }

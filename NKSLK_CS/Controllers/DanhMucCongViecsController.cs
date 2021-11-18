@@ -98,7 +98,7 @@ namespace NKSLK_CS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(string searchString, int category)
+        public ActionResult Search(string searchString, int category, int page = 1, int pageSize = 5)
         {
             List<DanhMucCongViec> danhMucCongViec = new List<DanhMucCongViec>();
             if (!String.IsNullOrEmpty(searchString))
@@ -112,7 +112,7 @@ namespace NKSLK_CS.Controllers
             {
                 danhMucCongViec = db.DanhMucCongViec.Where(x => x.id != 0).ToList();
             }
-            return View("Index", danhMucCongViec);
+            return View("Index", danhMucCongViec.OrderByDescending(x => x.id).ToPagedList(page, pageSize));
         }
     }
 }
