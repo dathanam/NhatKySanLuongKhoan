@@ -26,19 +26,19 @@
                             <div class="form-group has-success">
                                 <label class="col-lg-5 control-label">Ngày đăng ký</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.ngay_dang_ky" name="ngay_dang_ky" />
+                                    <input type="text" class="form-control" value="@Model.ngay_dang_ky.ToShortDateString()" name="ngay_dang_ky" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
                                 <label class="col-lg-5 control-label">Ngày sản xuất</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.ngay_san_xuat" name="ngay_san_xuat" />
+                                    <input type="text" class="form-control" value="@Model.ngay_san_xuat.ToShortDateString()" name="ngay_san_xuat" />
                                 </div>
                             </div>
                             <div class="form-group has-success">
                                 <label class="col-lg-5 control-label">Hạn sử dụng</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" value="@Model.han_su_dung" name="han_su_dung" />
+                                    <input type="text" class="form-control" value="@Model.han_su_dung.ToShortDateString()" name="han_su_dung" />
                                 </div>
                             </div>
                             <div class="form-group has-success">

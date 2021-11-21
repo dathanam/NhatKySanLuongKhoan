@@ -11,6 +11,8 @@
         public int id { get; set; }
         public string ten { get; set; }
         public DateTime NgayLamViec { get; set; }
+        public int CaLamViec { get; set; }
+        public string TenCV { get; set; }
         public double? luongSanPham { get; set; }
     }
 }

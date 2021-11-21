@@ -5,6 +5,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@{
+    var rs = (List<NKSLK_CS.DanhMucCongViec>)ViewBag.Inner;
+}
+
 @Html.Raw(TempData["msg"])
 <div class="table-agile-info">
     <div class="panel panel-default">
@@ -20,6 +25,11 @@
                     <select class="w3-select w3-border" name="category" required>
                         <option value="" disabled selected>Chọn chủ đề...</option>
                         <option value="1"> Tên danh mục công việc </option>
+                        <option value="2"> Danh mục công việc có đơn giá lớn hơn </option>
+                        <option value="3"> Danh mục công việc có đơn giá nhỏ hơn </option>
+                        <option value="4"> Danh mục công việc có đơn giá lớn nhất </option>
+                        <option value="5"> Danh mục công việc có đơn giá nhỏ nhất </option>
+                        <option value="6"> Công việc nhiều NKSLK nhất </option>
                     </select>
                 </div>
                 <div class="searchInput" style="width: 40%; float: right; display: flex; margin-top: -40px; ">

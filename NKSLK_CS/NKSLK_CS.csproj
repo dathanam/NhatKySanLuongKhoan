@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Models\CaLamViec.cs" />
     <Compile Include="Models\CongNhan.cs" />
+    <Compile Include="Models\CongNhanSapVeHuuModel.cs" />
     <Compile Include="Models\CongViec.cs" />
     <Compile Include="Controllers\ChamCongController.cs" />
     <Compile Include="Controllers\CongNhansController.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Models\PhongBan.cs" />
     <Compile Include="Models\Phuong.cs" />
     <Compile Include="Models\SearchCongNhanTheoCa.cs" />
+    <Compile Include="Models\SLKCV_Max.cs" />
     <Compile Include="Models\TKLuongSanPham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Quan.cs" />
@@ -256,6 +258,8 @@
     <Content Include="Views\CongNhans\Details.cshtml" />
     <Content Include="Views\DanhMucCongViecs\Index.cshtml" />
     <Content Include="Views\CongNhans\Search_CN_theo_ca.cshtml" />
+    <Content Include="Views\CongNhans\CongNhanSapVeHuu.cshtml" />
+    <Content Include="Views\DanhMucCongViecs\NKSLK_Max.cshtml" />
     <None Include="Views\Login\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

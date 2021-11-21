@@ -1,0 +1,78 @@
+﻿@model IEnumerable<NKSLK_CS.SLKCV_Max>
+@{
+    ViewBag.Title = "NKSKLMax";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var rs = (List<NKSLK_CS.SLKCV_Max>)ViewBag.Inner;
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="heading_title">Danh Mục Công Việc</h3>
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                <tr>
+                    <th>
+                        Tên danh mục công việc
+                    </th>
+                    <th>
+                        Định mức khoán
+                    </th>
+                    <th>
+                        Đơn vị khoán
+                    </th>
+                    <th>
+                        Hệ số khoán
+                    </th>
+                    <th>
+                        Định mức lao động
+                    </th>
+                    <th>
+                        Đơn giá
+                    </th>
+                </tr>
+
+                @foreach (var item in rs)
+                {
+                    <tr>
+                        <td>
+                            @item.ten
+                        </td>
+                        <td>
+                            @item.dinh_muc_khoan
+                        </td>
+                        <td>
+                            @item.don_vi_khoan
+                        </td>
+                        <td>
+                            @item.he_so_khoan
+                        </td>
+                        <td>
+                            @item.dinh_muc_lao_dong
+                        </td>
+                        <td>
+                            @item.don_gia
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="heading_btn">
+                <button type="button" class="btn btn-outline-success"><a href="/DanhMucCongViecs/Index">Back</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+

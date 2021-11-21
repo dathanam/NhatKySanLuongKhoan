@@ -97,6 +97,18 @@ namespace NKSLK_CS.Controllers
             return RedirectToAction("Index");
         }
 
+        public List<SLKCV_Max> NKSKLMax()
+        {
+            var rs = db.Database.SqlQuery<SLKCV_Max>("With CV(id ,SoLuong) as " +
+                                                            "(select DanhMucCongNhanThucHienKhoan.id_cong_viec, COUNT(DanhMucCongNhanThucHienKhoan.id_cong_viec) from DanhMucCongNhanThucHienKhoan " +
+                                                            "Group by DanhMucCongNhanThucHienKhoan.id_cong_viec) " +
+                                                            "select DanhMucCongViec.ten, DanhMucCongViec.dinh_muc_khoan, DanhMucCongViec.don_vi_khoan, DanhMucCongViec.he_so_khoan, DanhMucCongViec.dinh_muc_lao_dong, DanhMucCongViec.don_gia " +
+                                                            "from DanhMucCongViec, CV " +
+                                                            "where DanhMucCongViec.id = CV.id " +
+                                                            "and CV.SoLuong = (select MAX(CV.SoLuong) from CV)").ToList();
+            return rs;
+        }
+
         [HttpPost]
         public ActionResult Search(string searchString, int category, int page = 1, int pageSize = 5)
         {
@@ -107,10 +119,35 @@ namespace NKSLK_CS.Controllers
                 {
                     danhMucCongViec = db.DanhMucCongViec.Where(x => x.ten.Contains(searchString)).ToList();
                 }
+                else if(category == 2)
+                {
+                    danhMucCongViec = db.DanhMucCongViec.SqlQuery("select * from DanhMucCongViec where DanhMucCongViec.don_gia >=" + searchString).ToList();
+                }
+                else if(category == 3)
+                {
+                    danhMucCongViec = db.DanhMucCongViec.SqlQuery("select * from DanhMucCongViec where DanhMucCongViec.don_gia <=" + searchString).ToList();
+                }
             }
             else
             {
-                danhMucCongViec = db.DanhMucCongViec.Where(x => x.id != 0).ToList();
+                if (category == 4)
+                {
+                    danhMucCongViec = db.DanhMucCongViec.SqlQuery("select * from DanhMucCongViec where DanhMucCongViec.don_gia = (select max(don_gia) from DanhMucCongViec)").ToList();
+                }
+                else if (category == 5)
+                {
+                    danhMucCongViec = db.DanhMucCongViec.SqlQuery("select * from DanhMucCongViec where DanhMucCongViec.don_gia = (select min(don_gia) from DanhMucCongViec)").ToList();
+                }
+                else if (category == 6)
+                {
+                    ViewBag.Inner = new DanhMucCongViecsController().NKSKLMax();
+                    return View("NKSLK_Max");
+                }
+                else
+                {
+                    danhMucCongViec = db.DanhMucCongViec.Where(x => x.id != 0).ToList();
+                }
+
             }
             return View("Index", danhMucCongViec.OrderByDescending(x => x.id).ToPagedList(page, pageSize));
         }

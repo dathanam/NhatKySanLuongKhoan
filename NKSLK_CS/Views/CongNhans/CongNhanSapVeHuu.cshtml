@@ -1,0 +1,99 @@
+﻿@model IEnumerable<NKSLK_CS.CongNhanSapVeHuuModel>
+@{
+    ViewBag.Title = "CongNhanSapVeHuu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var phongbans = (List<NKSLK_CS.PhongBan>)ViewBag.phongban;
+    var phuongs = (List<NKSLK_CS.Phuong>)ViewBag.phuong;
+    var rs = (List<NKSLK_CS.CongNhanSapVeHuuModel>)ViewBag.Inner;
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="heading_title">Công Nhân</h3>
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                <tr>
+                    <th>
+                        Tên công nhân
+                    </th>
+                    <th>
+                        Ngày sinh
+                    </th>
+                    <th>
+                        Giới tính
+                    </th>
+                    <th>
+                        Phòng Ban
+                    </th>
+                    <th>
+                        Chức vụ
+                    </th>
+                    <th>
+                        Quê quán
+                    </th>
+                    <th>
+                        Huyện
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+
+                @foreach (var item in rs)
+                {
+                    <tr>
+                        <td>
+                            @item.ten
+                        </td>
+                        <td>
+                            @item.ngay_sinh
+                        </td>
+                        <td>
+                            @item.gioi_tinh
+                        </td>
+                        @foreach (PhongBan icon in phongbans.Where(n => n.id == item.id_phong_ban))
+                        {
+                            <td>
+                                @icon.ten
+                            </td>
+                        }
+                        <td>
+                            @item.chuc_vu
+                        </td>
+                        <td>
+                            @item.que_quan
+                        </td>
+                        @foreach (Phuong icon in phuongs.Where(n => n.id == item.id_phuong))
+                        {
+                            <td>
+                                @icon.ten
+                            </td>
+                        }
+                        <td>
+                            <a href="~/CongNhans/Details/@item.id" class="btn-large"><i class="fa fa-info"></i></a>
+                            <a href="~/CongNhans/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                            <a href="~/CongNhans/Delete/@item.id" class="btn-load"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="heading_btn">
+                <button type="button" class="btn btn-outline-success"><a href="/CongNhans/Index">Back</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+

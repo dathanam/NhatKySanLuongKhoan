@@ -171,6 +171,21 @@ namespace NKSLK_CS.Controllers
             return rs;
         }
 
+        public List<CongNhanSapVeHuuModel> CongNhanSapVeHuu()
+        {
+            var rs = db.Database.SqlQuery<CongNhanSapVeHuuModel>("With cau8(id, nghi_huu) as " +
+                "( select CongNhan.id, " +
+                "case " +
+                " when CongNhan.gioi_tinh = 'nam' and DATEDIFF(day, ngay_sinh, GETDATE()) Between 53 * 365 and 54 * 365 then N'sap_nghi_huu' " +
+                "when CongNhan.gioi_tinh = N'nữ' and DATEDIFF(day, ngay_sinh, GETDATE()) Between 48 * 365 and 49 * 365 then N'sap_nghi_huu'" +
+                " end as N'nghi_huu' from CongNhan" +
+                ") " +
+                "select CongNhan.ten, CongNhan.ngay_sinh, CongNhan.gioi_tinh, CongNhan.id_phong_ban, CongNhan.chuc_vu," +
+                "CongNhan.que_quan, CongNhan.id_phuong from CongNhan, cau8 where CongNhan.id = cau8.id " +
+                "and cau8.nghi_huu = N'sap_nghi_huu'").ToList();
+            return rs;
+        }
+
         [HttpPost]
         public ActionResult Search(string searchString, int category, int page = 1, int pageSize = 5)
         {
@@ -211,9 +226,19 @@ namespace NKSLK_CS.Controllers
             }
             else
             {
-                congNhan = db.CongNhan.Where(x => x.id != 0).ToList();
-                ViewBag.phongban = new CongNhansController().Chucvu();
-                ViewBag.phuong = new CongNhansController().getPhuong();
+                if (category == 6)
+                {
+                    ViewBag.Inner = new CongNhansController().CongNhanSapVeHuu();
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                    return View("CongNhanSapVeHuu");
+                }
+                else
+                {
+                    congNhan = db.CongNhan.Where(x => x.id != 0).ToList();
+                    ViewBag.phongban = new CongNhansController().Chucvu();
+                    ViewBag.phuong = new CongNhansController().getPhuong();
+                }
             }
             return View("Index", congNhan.OrderByDescending(x => x.id).ToPagedList(page, pageSize));
         }
