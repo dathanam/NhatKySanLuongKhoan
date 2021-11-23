@@ -1,0 +1,47 @@
+﻿@model IEnumerable <NKSLK_CS.ThongKe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thống Kê</h2>
+
+<table class="table">
+    <tr>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngay_sinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TongSoCong)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ngay_sinh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TongSoCong)
+    </td>
+    <td>
+    </td>
+</tr>
+}
+
+</table>

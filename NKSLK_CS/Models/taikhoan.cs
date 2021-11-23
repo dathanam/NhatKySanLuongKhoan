@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace NKSLK_CS
 {
@@ -31,10 +32,13 @@ namespace NKSLK_CS
     class DSTaiKhoan
     {
         /*1. Khởi tạo hàm contructor mặc định*/
-        DBConecttion db;
+        private NKSLK_Context context = null;
+
+        DBConecttion db; 
         public DSTaiKhoan()
         {
             db = new DBConecttion();
+            context = new NKSLK_Context();
         }
         /*phương thức lấy dữ liệu từ cơ sở dữ liệu*/
         public List<TaiKhoan> GetTaikhoans(string id)
@@ -121,7 +125,62 @@ namespace NKSLK_CS
             cmd.Dispose();
             con.Close();
         }
+        
+        public static DataSet ThucthiStore_DataSet(string StoredProcedure,
+             params SqlParameter[] Parameters)
+        {
+            DBConecttion db = new DBConecttion();
+            SqlConnection con = db.GetConnection();
+            SqlCommand cmd = new SqlCommand(StoredProcedure, con);
+            if (Parameters != null)
+            {
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddRange(Parameters);
+            }
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(StoredProcedure, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            da.SelectCommand = cmd;
+            try
+            {
+                con.Open();
+                da.Fill(ds);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                    con.Close();
+                con.Dispose();
+            }
+            return ds;
 
+        }
+
+
+
+        public DataTable DangNhap(String tendangnhap, String matkhau)
+        {
+            SqlParameter[] arrParam =
+            {
+                new SqlParameter("@tendangnhap", SqlDbType.NVarChar),
+                 new SqlParameter("@matkhau", SqlDbType.NVarChar)
+            };
+            arrParam[0].Value = tendangnhap;
+            arrParam[1].Value = matkhau;
+            return ThucthiStore_DataSet("DangNhap", arrParam).Tables[0];
+        }
+
+
+        public bool login (String tendangnhap , String matkhau)
+        {
+            Object[] sqlParams= 
+            {
+                new SqlParameter("@tendangnhap",tendangnhap),
+                new SqlParameter ("@matkhau",matkhau),
+            };
+            var res = context.Database.SqlQuery<bool>("Sp_Account_login @tendangnhap,@matkhau", sqlParams).SingleOrDefault();
+            return res;
+        }
 
     }
 

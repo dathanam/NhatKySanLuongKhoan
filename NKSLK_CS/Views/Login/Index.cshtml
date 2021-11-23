@@ -1,4 +1,7 @@
-﻿@{
+﻿@model NKSLK_CS.TaiKhoan
+
+
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -17,14 +20,25 @@
             <div class="wrapper">
                 <div class="form-section">
                     <h3>Login</h3>
-                    <form action="#" method="post" class="signin-form">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken();
+
                         <div class="form-input">
-                            <input type="text" name="Username" placeholder="Username" required="" autofocus>
+                            @Html.TextBoxFor(model => model.tendangnhap, new { @class = "form-control", @placeholder = "tendangnhap" })
+
                         </div>
                         <div class="form-input">
-                            <input type="password" name="password" placeholder="Password" required="">
+                            @Html.TextBoxFor(model => model.matkhau, new { @class = "form-control", @placeholder = "matkhau" })
                         </div>
                         <button type="submit" class="btn btn-primary theme-button mt-4">Log in</button>
+
+
+                    }
+
+
+                    <form action="#" method="post" class="signin-form">
                     </form>
                 </div>
             </div>

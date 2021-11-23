@@ -144,6 +144,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBConecttion.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NhatKySanLuongKhoan.cs" />
     <Compile Include="Models\NKSLK_Context.cs" />
     <Compile Include="Models\PhongBan.cs" />
