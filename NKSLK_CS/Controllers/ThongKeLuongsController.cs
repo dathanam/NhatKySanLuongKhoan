@@ -208,7 +208,61 @@ namespace NKSLK_CS.Controllers
             return rs;
         }
 
-        public ActionResult Details(int? id)
+        public List<TKLuongSanPhamModel> DetailLuongTheoTuan(int? id, DateTime tuan)
+        {
+            var rs = db.Database.SqlQuery<TKLuongSanPhamModel>("with Cau12(SoCongNhan, idCongViec, idCa, Ngay, tongTG) as " +
+                "( " +
+                    "select Count(DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca) as SoCongNhan, " +
+                    "DanhMucCongNhanThucHienKhoan.id_cong_viec, SanLuongKhoanTheoCa.id_ca, NhatKySanLuongKhoan.ngay, " +
+                    "Sum(dbo.SoGioLam(DanhMucCongNhanThucHienKhoan.thoi_gian_den, DanhMucCongNhanThucHienKhoan.thoi_gian_ve)) as tongTG " +
+                    "from DanhMucCongNhanThucHienKhoan, SanLuongKhoanTheoCa, NhatKySanLuongKhoan " +
+                    "where DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca = SanLuongKhoanTheoCa.id " +
+                    "and SanLuongKhoanTheoCa.id_nkslk = NhatKySanLuongKhoan.id " +
+                    "group by DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca, DanhMucCongNhanThucHienKhoan.id_cong_viec, SanLuongKhoanTheoCa.id_ca, NhatKySanLuongKhoan.ngay" +
+                 ") " +
+                "select CongNhan.id, CongNhan.ten, NhatKySanLuongKhoan.ngay as NgayLamViec, SanLuongKhoanTheoCa.id_ca as CaLamViec, DanhMucCongViec.ten as TenCV, " +
+                " ((DanhMucCongNhanThucHienKhoan.san_luong_thuc_te * DanhMucCongViec.don_gia) * dbo.SoGioLam(DanhMucCongNhanThucHienKhoan.thoi_gian_den, DanhMucCongNhanThucHienKhoan.thoi_gian_ve) / Cau12.tongTG) as luongSanPham " +
+                "from CongNhan, CaLamViec, DanhMucCongNhanThucHienKhoan, CongViec, DanhMucCongViec, NhatKySanLuongKhoan, SanLuongKhoanTheoCa, Cau12 " +
+                "where CongNhan.id = DanhMucCongNhanThucHienKhoan.id_cong_nhan " +
+                "and DanhMucCongNhanThucHienKhoan.id_cong_viec = CongViec.id " +
+                "and CongViec.id_danh_muc_cong_viec = DanhMucCongViec.id " +
+                "and SanLuongKhoanTheoCa.id_ca = CaLamViec.id " +
+                "and DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca = SanLuongKhoanTheoCa.id " +
+                "and SanLuongKhoanTheoCa.id_nkslk = NhatKySanLuongKhoan.id and Cau12.idCongViec = CongViec.id " +
+                "and Cau12.Ngay = NhatKySanLuongKhoan.ngay " +
+                "and Cau12.idCa = CaLamViec.id " +
+                "and CongNhan.id = " + id +
+                "and NhatKySanLuongKhoan.Ngay between dbo.firstday('" + tuan + "') and dbo.lastday('" + tuan + "') ").ToList();
+            return rs;
+        }
+        public List<TKLuongSanPhamModel> DetailLuong(int? id)
+        {
+            var rs = db.Database.SqlQuery<TKLuongSanPhamModel>("with Cau12(SoCongNhan, idCongViec, idCa, Ngay, tongTG) as " +
+                "( " +
+                    "select Count(DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca) as SoCongNhan, " +
+                    "DanhMucCongNhanThucHienKhoan.id_cong_viec, SanLuongKhoanTheoCa.id_ca, NhatKySanLuongKhoan.ngay, " +
+                    "Sum(dbo.SoGioLam(DanhMucCongNhanThucHienKhoan.thoi_gian_den, DanhMucCongNhanThucHienKhoan.thoi_gian_ve)) as tongTG " +
+                    "from DanhMucCongNhanThucHienKhoan, SanLuongKhoanTheoCa, NhatKySanLuongKhoan " +
+                    "where DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca = SanLuongKhoanTheoCa.id " +
+                    "and SanLuongKhoanTheoCa.id_nkslk = NhatKySanLuongKhoan.id " +
+                    "group by DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca, DanhMucCongNhanThucHienKhoan.id_cong_viec, SanLuongKhoanTheoCa.id_ca, NhatKySanLuongKhoan.ngay" +
+                 ") " +
+                "select CongNhan.id, CongNhan.ten, NhatKySanLuongKhoan.ngay as NgayLamViec, SanLuongKhoanTheoCa.id_ca as CaLamViec, DanhMucCongViec.ten as TenCV, " +
+                " ((DanhMucCongNhanThucHienKhoan.san_luong_thuc_te * DanhMucCongViec.don_gia) * dbo.SoGioLam(DanhMucCongNhanThucHienKhoan.thoi_gian_den, DanhMucCongNhanThucHienKhoan.thoi_gian_ve) / Cau12.tongTG) as luongSanPham " +
+                "from CongNhan, CaLamViec, DanhMucCongNhanThucHienKhoan, CongViec, DanhMucCongViec, NhatKySanLuongKhoan, SanLuongKhoanTheoCa, Cau12 " +
+                "where CongNhan.id = DanhMucCongNhanThucHienKhoan.id_cong_nhan " +
+                "and DanhMucCongNhanThucHienKhoan.id_cong_viec = CongViec.id " +
+                "and CongViec.id_danh_muc_cong_viec = DanhMucCongViec.id " +
+                "and SanLuongKhoanTheoCa.id_ca = CaLamViec.id " +
+                "and DanhMucCongNhanThucHienKhoan.id_san_luong_khoan_theo_ca = SanLuongKhoanTheoCa.id " +
+                "and SanLuongKhoanTheoCa.id_nkslk = NhatKySanLuongKhoan.id and Cau12.idCongViec = CongViec.id " +
+                "and Cau12.Ngay = NhatKySanLuongKhoan.ngay " +
+                "and Cau12.idCa = CaLamViec.id " +
+                "and CongNhan.id = " + id).ToList();
+            return rs;
+        }
+
+        public ActionResult SearchDetails(int? id)
         {
             int month1;
             month1 = Convert.ToInt32(TempData["thang"]);
@@ -216,10 +270,25 @@ namespace NKSLK_CS.Controllers
             return View();
         }
 
+        //public ActionResult SearchDetailsTheoTuan(int? id)
+        //{
+        //    DateTime tuan;
+        //    tuan = (DateTime)TempData["tuan"];
+        //    ViewBag.Inner = new ThongKeLuongsController().DetailLuongTheoTuan(id, tuan);
+        //    return View();
+        //}
+
+        public ActionResult Details(int? id)
+        {
+            ViewBag.Inner = new ThongKeLuongsController().DetailLuong(id);
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult Search(string searchString, int category)
         {
+            TempData["tuan"] = searchString;
             TempData["thang"] = searchString;
             List<TKLuongSanPhamModel> TKLuong = new List<TKLuongSanPhamModel>();
             if (!String.IsNullOrEmpty(searchString))
@@ -250,7 +319,7 @@ namespace NKSLK_CS.Controllers
                 else
                     ViewBag.Inner = new ThongKeLuongsController().ThongKeLuong();
             }
-            return View("Index", TKLuong);
+            return View("Search", TKLuong);
         }
     }
 }

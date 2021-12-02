@@ -1,0 +1,64 @@
+﻿@model IEnumerable<NKSLK_CS.TKLuongSanPhamModel>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var rs = (List<NKSLK_CS.TKLuongSanPhamModel>)ViewBag.Inner;
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="heading_title">Lương Sản Phẩm</h3>
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        Tên CN
+                    </th>
+                    <th>
+                        Lương sản phẩm
+                    </th>
+                </tr>
+
+                @foreach (var item in rs)
+                {
+                    <tr>
+                        <td>
+                            @item.id
+                        </td>
+                        <td>
+                            @item.ten
+                        </td>
+                        <td>
+                            @item.luongSanPham
+                        </td>
+                        <td>
+                            <a href="/ThongKeLuongs/SearchDetails/@item.id" class="btn-large"><i class="fa fa-info-circle"></i></a>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+            <div class="heading_btn">
+                <button type="button" class="btn btn-outline-success"><a href="/ThongKeLuongs/Index">Back</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
