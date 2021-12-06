@@ -51,71 +51,89 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div id="sidebar" class="nav-collapse">
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <li class="sub-menu">
-                            <a href="~/Menus/Index">
-                                <i class="fa fa-dashboard"></i>
-                                <span>Menu</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="~/ChamCong/Index">
-                                <i class="fa fa-star"></i>
-                                <span>Chấm Công</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>NKSLK </span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="~/CongNhans/Index">
-                                <i class="fa fa-male"></i>
-                                <span>Công Nhân</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="~/CongViecs/Index">
-                                <i class="fa fa-briefcase"></i>
-                                <span>Công Việc </span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="~/DanhMucCongViecs/Index">
-                                <i class="fa fa-tasks"></i>
-                                <span>Danh Mục Công Việc</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="~/SanPhams/Index">
-                                <i class="fa fa-th"></i>
-                                <span>Sản Phẩm</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="~/PhongBans/Index">
-                                <i class="fa fa-building"></i>
-                                <span>Phòng Ban</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class=" fa fa-bar-chart-o"></i>
-                                <span>Thống Kê</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="google_map.html">Số ngày công</a></li>
-                                <li><a href="vector_map.html">Số giờ làm </a></li>
-                                <li><a href="vector_map.html">Lương </a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-user-plus"></i>
-                                <span>Đăng Ký</span>
-                            </a>
-                        </li>
+                        @if (Session["SESSION_GROUP"] != null)
+                        {
+                            List<string> privilegeLevels = (List<string>)Session["SESSION_GROUP"];
+
+                            if (privilegeLevels[0].CompareTo("ADMIN") == 0)
+                            {
+                                <li class="sub-menu">
+                                    <a href="~/Menus/Index">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>Menu</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="~/ChamCong/Index">
+                                        <i class="fa fa-star"></i>
+                                        <span>Chấm Công</span>
+                                    </a>
+                                </li>
+                            }
+
+                            if (privilegeLevels[0].CompareTo("USER") == 0)
+                            {
+
+
+                                <li class="sub-menu">
+                                    <a href="javascript:;">
+                                        <i class="fa fa-book"></i>
+                                        <span>NKSLK </span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="~/CongNhans/Index">
+                                        <i class="fa fa-male"></i>
+                                        <span>Công Nhân</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="~/CongViecs/Index">
+                                        <i class="fa fa-briefcase"></i>
+                                        <span>Công Việc </span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="~/DanhMucCongViecs/Index">
+                                        <i class="fa fa-tasks"></i>
+                                        <span>Danh Mục Công Việc</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="~/SanPhams/Index">
+                                        <i class="fa fa-th"></i>
+                                        <span>Sản Phẩm</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="~/PhongBans/Index">
+                                        <i class="fa fa-building"></i>
+                                        <span>Phòng Ban</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="javascript:;">
+                                        <i class=" fa fa-bar-chart-o"></i>
+                                        <span>Thống Kê</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li><a href="google_map.html">Số ngày công</a></li>
+                                        <li><a href="vector_map.html">Số giờ làm </a></li>
+                                        <li><a href="vector_map.html">Lương </a></li>
+                                    </ul>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="javascript:;">
+                                        <i class="fa fa-user-plus"></i>
+                                        <span>Đăng Ký</span>
+                                    </a>
+                                </li>
+                            }
+
+
+
+                        }
+
                     </ul>
                 </div>
             </div>

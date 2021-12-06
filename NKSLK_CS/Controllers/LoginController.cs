@@ -26,7 +26,9 @@ namespace NKSLK_CS.Controllers
             var result = dSTaiKhoan.login(taiKhoan.tendangnhap, taiKhoan.matkhau);
             if(result && ModelState.IsValid)
             {
+                var listNhom = dSTaiKhoan.GetListIDNhom(taiKhoan.tendangnhap);
                 SessionHelper.SetSession(new UserSession() { tendangnhap = taiKhoan.tendangnhap });
+                Session.Add("SESSION_GROUP", listNhom);
                 return RedirectToAction("Index", "PhongBans");
             }
             else
@@ -60,5 +62,8 @@ namespace NKSLK_CS.Controllers
             }
         }
     }
+
+    
+
 
 }

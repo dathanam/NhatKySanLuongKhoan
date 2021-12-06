@@ -14,14 +14,19 @@
             <h3 class="heading_title">Danh Sách Phòng Ban</h3>
 
             <div class="col-md-4">
-                <div>
-                    <form action="Search" method="post">
-                        <input type="text" class="form-control form-control-sm"
-                               placeholder="nhập tên" name="ten">
-                        <button type="submit" class="btn btn-outline-primary sel">Search</button>
-                    </form>
-                </div>
+               
+                @using (Html.BeginForm("Index","PhongBans",FormMethod.Get))
+                {
+                    <div class="form-group form-inline">
+                        <input placeholder="Nhập từ khóa " type="text" name="timkiem" class="form-control" />
+                       
+                        <input type="submit" value="Tìm Kiếm" class="form-control" />
+
+                    </div>
+                }
             </div>
+
+           
 
         </div>
         <div>

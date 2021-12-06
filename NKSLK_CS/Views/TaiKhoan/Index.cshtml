@@ -5,11 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div class="col-md-4">
+
+    @using (Html.BeginForm("Index", "PhongBans", FormMethod.Get))
+    {
+        <div class="form-group form-inline">
+            <input placeholder="Nhập từ khóa " type="text" name="timkiem" class="form-control" />
+
+            <input type="submit" value="Tìm Kiếm" class="form-control" />
+
+        </div>
+    }
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -24,23 +37,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tendangnhap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.matkhau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_cong_nhan)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tendangnhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matkhau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_cong_nhan)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

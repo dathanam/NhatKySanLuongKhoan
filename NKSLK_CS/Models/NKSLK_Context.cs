@@ -29,6 +29,8 @@ namespace NKSLK_CS
 
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
 
+        public virtual DbSet <nhom> nhom { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CaLamViec>()

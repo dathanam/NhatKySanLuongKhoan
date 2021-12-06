@@ -27,6 +27,9 @@ namespace NKSLK_CS
 
         public virtual CongNhan CongNhan { get; set; }
 
+        public int? id_nhom { set; get; }
+        public virtual nhom Nhom { get; set; }
+
     }
 
     class DSTaiKhoan
@@ -181,6 +184,23 @@ namespace NKSLK_CS
             var res = context.Database.SqlQuery<bool>("Sp_Account_login @tendangnhap,@matkhau", sqlParams).SingleOrDefault();
             return res;
         }
+
+
+        public List<String> GetListIDNhom (String tendangnhap)
+        {
+            // var sql = "select nhom.ten from taikhoan join nhom on taikhoan.id_nhom=nhom.id where taikhoan.tendangnhap= '"+tendangnhap+"'";
+
+            var data = (from a in context.TaiKhoan
+                       join b in context.nhom on a.id_nhom equals b.id
+                       where a.tendangnhap == tendangnhap
+                       select new
+                       {
+                           b.id,b.ten
+                       });
+            return data.Select(x => x.ten).ToList();
+
+        }
+
 
     }
 

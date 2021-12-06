@@ -11,11 +11,18 @@ namespace NKSLK_CS.Controllers
     {
         private NKSLK_Context db = new NKSLK_Context();
         // GET: PhongBans
-        public ActionResult Index()
+        public ActionResult Index(string timkiem)
         {
             PhongBanList strPB = new PhongBanList();
             List<PhongBan> obj = strPB.getPhongBan(string.Empty);
+            if (!String.IsNullOrEmpty(timkiem))
+            {
+                // obj = obj.Where(x => x.ten.Contains(timkiem)).ToList();
+                List<PhongBan> obj1 = strPB.search(timkiem);
+                return View(obj1);
+            }
             return View(obj);
+
         }
         public ActionResult Create()
         {
@@ -100,20 +107,11 @@ namespace NKSLK_CS.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-
-        public ActionResult Index(string searching)
-        {
-            var links = from l in db.PhongBan select l;
-            if (!String.IsNullOrEmpty(searching)) // kiểm tra chuỗi tìm kiếm có rỗng/null hay không
-            {
-                links = links.Where(s => s.ten.Contains(searching)); //lọc theo chuỗi tìm kiếm
-            }
-
-            return View(links); //trả về kết quả
-        }
+        
 
 
+       
+   
 
     }
 }
