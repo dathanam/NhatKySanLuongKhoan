@@ -43,11 +43,15 @@ namespace NKSLK_CS.Controllers
 
         public ActionResult Edit(int? id)
         {
+            PhongBanList strPB = new PhongBanList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhongBan phongBan = db.PhongBan.Find(id);
+        //    PhongBan phongBan = db.PhongBan.Find(id);
+            PhongBan phongBan = strPB.GetPhongBanByID(id.Value);
+
+
             if (phongBan == null)
             {
                 return HttpNotFound();

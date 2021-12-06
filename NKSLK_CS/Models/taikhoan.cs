@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace NKSLK_CS
 {
-    [Table("taikhoan")]
+    [Table("TaiKhoan")]
     public class TaiKhoan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,7 +28,7 @@ namespace NKSLK_CS
         public virtual CongNhan CongNhan { get; set; }
 
         public int? id_nhom { set; get; }
-        public virtual nhom Nhom { get; set; }
+        public virtual  nhom nhom { get; set; }
 
     }
 
@@ -66,7 +66,7 @@ namespace NKSLK_CS
             cmd.Fill(dt);
 
             cmd.Dispose();/*ngắt câu lệnh đổ dữ liệu vào*/
-            con.Close(); /*đóng kết nối*/
+            con.Close();/*đóng kết nối*/
 
             /*sau khi đổ toàn bộ dữ liệu vào bảng đưa dữ liệu vừa đổ ra view */
 
@@ -78,7 +78,7 @@ namespace NKSLK_CS
                 taikhoan.tendangnhap = dt.Rows[i]["tendangnhap"].ToString();
                 taikhoan.matkhau = dt.Rows[i]["matkhau"].ToString();
                 taikhoan.id_cong_nhan = Convert.ToInt32(dt.Rows[i]["id_cong_nhan"].ToString());
-
+                taikhoan.id_nhom = Convert.ToInt32(dt.Rows[i]["id_nhom"].ToString());
                 listtaikhoan.Add(taikhoan);
             }
 
@@ -90,7 +90,7 @@ namespace NKSLK_CS
 
         public void addTaiKhoan (TaiKhoan taiKhoan)
         {
-            string sql = "insert into taikhoan (tendangnhap, matkhau, id_cong_nhan) values ('"+taiKhoan.tendangnhap+"','"+taiKhoan.matkhau+"','"+taiKhoan.id_cong_nhan+"')";
+            string sql = "insert into taikhoan (tendangnhap, matkhau, id_cong_nhan, id_nhom) values ('"+taiKhoan.tendangnhap+"','"+taiKhoan.matkhau+"','"+taiKhoan.id_cong_nhan+"','"+taiKhoan.id_nhom+"')";
             SqlConnection con = db.GetConnection();
             SqlCommand cmd = new SqlCommand(sql,con);
 
@@ -104,7 +104,7 @@ namespace NKSLK_CS
 
         public void editTaiKhoan (TaiKhoan taiKhoan)
         {
-            string sql = "update taikhoan set tendangnhap ='"+taiKhoan.tendangnhap+"',matkhau= '"+taiKhoan.matkhau+"',id_cong_nhan= '"+taiKhoan.id_cong_nhan+"' where id =  "+taiKhoan.id;
+            string sql = "update taikhoan set tendangnhap ='"+taiKhoan.tendangnhap+"',matkhau= '"+taiKhoan.matkhau+"',id_cong_nhan= '"+taiKhoan.id_cong_nhan+"',id_nhom = '"+taiKhoan.id_nhom+"' where id =  "+taiKhoan.id;
             SqlConnection con = db.GetConnection();
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -118,7 +118,7 @@ namespace NKSLK_CS
 
         public void deleteTaiKhoan (TaiKhoan taiKhoan)
         {
-            string sql = "Delete from taikhoan where id =" + taiKhoan.id;
+            string sql = "Delete  from taikhoan where id =" + taiKhoan.id;
             SqlConnection con = db.GetConnection();
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -201,6 +201,13 @@ namespace NKSLK_CS
 
         }
 
+        public TaiKhoan GetTaiKhoanByID (int id)
+        {
+            var TaiKhoan = (from b in context.TaiKhoan
+                            where b.id.Equals(id)
+                            select b).FirstOrDefault();
+            return TaiKhoan;
+        }
 
     }
 

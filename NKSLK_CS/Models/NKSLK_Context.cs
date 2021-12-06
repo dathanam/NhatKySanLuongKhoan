@@ -55,6 +55,12 @@ namespace NKSLK_CS
                 .WithOptional(e => e.CongNhan)
                 .HasForeignKey(e => e.id_cong_nhan);
 
+            modelBuilder.Entity<CongNhan>()
+                .HasMany(e => e.TaiKhoan)
+                .WithOptional(e => e.CongNhan)
+                .HasForeignKey(e => e.id_cong_nhan);
+
+
             modelBuilder.Entity<CongViec>()
                 .HasMany(e => e.DanhMucCongNhanThucHienKhoan)
                 .WithOptional(e => e.CongViec)
@@ -107,6 +113,11 @@ namespace NKSLK_CS
                 .HasMany(e => e.Quan)
                 .WithOptional(e => e.ThanhPho)
                 .HasForeignKey(e => e.id_thanh_pho);
+            modelBuilder.Entity<nhom>()
+                .HasMany(e => e.TaiKhoan)
+                .WithOptional(e => e.nhom)
+                .HasForeignKey(e => e.id_nhom);
+
         }
     }
 }

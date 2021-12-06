@@ -30,8 +30,6 @@ namespace NKSLK_CS
         [StringLength(200)]
         public string ten { get; set; }
 
-        public string timkiem { set; get; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CongNhan> CongNhan { get; set; }
     }
@@ -41,9 +39,11 @@ namespace NKSLK_CS
 
         // ThucCD Phong Ban 
         DBConecttion db;
+        private NKSLK_Context context = null;
         public PhongBanList()
         {
             db = new DBConecttion();
+            context = new NKSLK_Context();
         }
 
         // Phuong Thuc Lay database 
@@ -143,6 +143,17 @@ namespace NKSLK_CS
             }
             return listPhongBan;
         }
+        public  PhongBan GetPhongBanByID (int id)
+        {
+            var PhongBan = (from a in context.PhongBan
+                            where a.id.Equals(id)
+                            select a
+                       ).FirstOrDefault();
+            return PhongBan;
+        }
+
+      
+
     }
 
 }

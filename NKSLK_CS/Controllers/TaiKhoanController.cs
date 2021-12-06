@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace NKSLK_CS.Controllers
 {
+    
     public class TaiKhoanController : Controller
     {
+        private NKSLK_Context db = new NKSLK_Context();
         // GET: TaiKhoan
         public ActionResult Index()
         {
@@ -29,19 +32,29 @@ namespace NKSLK_CS.Controllers
                 dSTaiKhoan.addTaiKhoan(taiKhoan);
                 return RedirectToAction("Index");
             }
-            else
-            {
+            
+            
                 return View();
-            }
         }
+        
 
         /*Sửa Tài Khoản*/
-        public ActionResult Edit (string id= "")
+        public ActionResult Edit (int ? id)
         {
             DSTaiKhoan dstaiKhoan = new DSTaiKhoan();
-            List<TaiKhoan> obj = dstaiKhoan.GetTaikhoans(id);
-            return View(obj.FirstOrDefault());
+            if (id== null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+              TaiKhoan taiKhoan = dstaiKhoan.GetTaiKhoanByID(id.Value);
+           // TaiKhoan taiKhoan = db.TaiKhoan.Find(id.Value);
+            if(taiKhoan== null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialEdit", taiKhoan);
         }
+
         [HttpPost]
 
         public ActionResult Edit (TaiKhoan taiKhoan)
@@ -52,11 +65,20 @@ namespace NKSLK_CS.Controllers
         }
 
         /*Xóa tài khoản*/
-        public ActionResult Delete(string id = "")
+        public ActionResult Delete(int ? id)
         {
             DSTaiKhoan dstaiKhoan = new DSTaiKhoan();
-            List<TaiKhoan> obj = dstaiKhoan.GetTaikhoans(id);
-            return View(obj.FirstOrDefault());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TaiKhoan taiKhoan = dstaiKhoan.GetTaiKhoanByID(id.Value);
+            // TaiKhoan taiKhoan = db.TaiKhoan.Find(id.Value);
+            if (taiKhoan == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDelete", taiKhoan);
         }
         [HttpPost]
 

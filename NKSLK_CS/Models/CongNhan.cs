@@ -13,7 +13,9 @@ namespace NKSLK_CS
         public CongNhan()
         {
             DanhMucCongNhanThucHienKhoan = new HashSet<DanhMucCongNhanThucHienKhoan>();
+            TaiKhoan = new HashSet<TaiKhoan>();
         }
+
 
         public int id { get; set; }
 
@@ -48,5 +50,7 @@ namespace NKSLK_CS
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhMucCongNhanThucHienKhoan> DanhMucCongNhanThucHienKhoan { get; set; }
+
+        public virtual ICollection<TaiKhoan> TaiKhoan { get; set; }
     }
 }
